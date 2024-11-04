@@ -1,0 +1,16 @@
+node_modules/
+allure-report/
+allure-results/
+/package-lock.json
+/LogsAndResults
+/.idea
+/_results_
+*.env
+.DS_Store
+*/.DS_Store
+junit/
+json-report/
+tmp/
+logs/
+.vscode
+

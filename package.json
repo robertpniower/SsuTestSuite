@@ -1,0 +1,79 @@
+{
+  "name": "deliveryherosfautomationproject",
+  "description": "Salesfoce UI Test Automation Framework",
+  "scripts": {
+    "regression": "./node_modules/.bin/wdio ./wdio.conf.js --suite regression",
+    "test": "npx wdio wdioAsync.conf.js --require dd-trace/ci/init",
+    "report": "allure serve allure-results/",
+    "report:history": "mkdir -p allure-report/history allure-results && cp -a allure-report/history allure-results",
+    "report.ci": "allure generate --clean -o allure-report",
+    "eslint": "eslint . --max-warnings=0",
+    "eslint-fix": "eslint . --fix",
+   
+    "ssu-v3-test": "./node_modules/.bin/wdio ./conf/SSU-V3/LATAM/ssu.v3.conf.js",
+    "ssu-v3-tb-test": "./node_modules/.bin/wdio ./conf/SSU-V3/MENA/ssu.tb.v3.conf.js",
+    "ssu-v3-fp-test": "./node_modules/.bin/wdio ./conf/SSU-V3/APAC/ssu.fp.v3.conf.js",
+    "ssu-v3-eu-test": "./node_modules/.bin/wdio ./conf/SSU-V3/EU/ssu.eu.v3.conf.js"
+   
+  },
+  "author": "Salesforce Automation Team",
+  "license": "ISC",
+  "devDependencies": {
+    "@wdio/allure-reporter": "^8.40.3",
+    "@wdio/browserstack-service": "^8.40.3",
+    "@wdio/cli": "^8.40.3",
+    "@wdio/cucumber-framework": "^8.40.3",
+    "@wdio/junit-reporter": "^8.40.3",
+    "@wdio/local-runner": "^8.40.3",
+    "@wdio/mocha-framework": "^8.40.3",
+    "@wdio/spec-reporter": "^8.40.3",
+    "chai": "4.0.2",
+    "chai-webdriverio": "^1.0.0",
+    "csv-stringify": "^6.2.0",
+    "eslint": "^8.53.0",
+    "husky": "^4.3.0",
+    "lint-staged": "^15.2.2",
+    "local-runner": "^0.1.1-alpha",
+    "mocha-steps": "^1.3.0",
+    "wdio-docker-service": "^3.1.3",
+    "webdriverio": "^8.40.3"
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.19.4",
+    "@faker-js/faker": "^8.3.1",
+    "@wdio/codemod": "^0.12.0",
+    "allure-commandline": "^2.13.8",
+    "axios": "^1.6.2",
+    "chrome-modheader": "^2.0.7",
+    "concurrently": "^8.2.2",
+    "convert-csv-to-json": "^2.0.0",
+    "cross-env": "^7.0.3",
+    "date-fns": "^2.30.0",
+    "dd-trace": "^2.2.0",
+    "deepmerge": "^4.3.1",
+    "dotenv": "^16.3.1",
+    "glob": "^7.1.7",
+    "jscodeshift": "^0.14.0",
+    "jsforce": "^1.11.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "qs": "^6.10.1",
+    "randexp": "^0.5.3",
+    "soft-assert": "^0.2.6",
+    "string.prototype.replaceall": "^1.0.6",
+    "util": "^0.12.5",
+    "wdio-video-reporter": "^4.0.5",
+    "winston": "^3.3.3",
+    "xlsx": "^0.18.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run eslint"
+    ]
+  }
+}

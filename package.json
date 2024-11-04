@@ -66,11 +66,7 @@
     "winston": "^3.3.3",
     "xlsx": "^0.18.5"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
+ 
   "lint-staged": {
     "*.js": [
       "npm run eslint"

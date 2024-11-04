@@ -1,0 +1,89 @@
+pipeline {
+    agent { label 'kubernetes' }
+    environment{
+        BASE_JENKINS_URL = 'https://sf-qa-automation.sfplatform.deliveryhero.io/job/Pipelines/job/SSU_V3_Pipelines/job/LATAM_SSU_V3_Pipeline/'
+        ALLURE_URL = 'https://sf-qa-automation.sfplatform.deliveryhero.io/job/Pipelines/job/SSU_V3_Pipelines/job/LATAM_SSU_V3_Pipeline/'
+        BASE_REPO_URL = 'https://github.com/deliveryhero/dh-salesforce-async-ui-automation/commit'
+        STAGEQAAUTO_USERNAME = credentials('STAGEQAAUTO_USERNAME')
+        STAGEQAAUTO_KEY = credentials('STAGEQAAUTO_KEY')
+        SSU_SF_CLIENT_ID_UAT = credentials('SSU_SF_CLIENT_ID_UAT')
+        SSU_SF_CLIENT_SECRET_UAT = credentials('SSU_SF_CLIENT_SECRET_UAT')
+        SSU_SF_PASSWORD_UAT = credentials('SSU_SF_PASSWORD_UAT')
+        SSU_ENV = 'uat'
+        SFENV = 'uat'
+    }     
+    stages {
+        stage('jenkins-start-notification'){
+            steps{
+                slackSend (channel: 'ssu_v2_plus_daily_run', tokenCredentialId: 'ssu_v2_plus_daily_run' , color: '#1676c9', message: "\n *Salesforce SSU V3 Automation Updates*: \n Automation started on the *${GIT_BRANCH}* branch \n\n To see the status of the automation please <${BASE_JENKINS_URL}/${BUILD_NUMBER}|*follow this link*> \n ")
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                echo 'Install Dependencies...'
+                sh 'rm -r -f node_modules/'
+                sh 'rm -f package-lock.json'
+                sh 'node --version'
+                sh 'npm install'                   
+                }
+            }
+
+        stage('Test') { 
+            steps {
+                echo 'Starting Test Automation Suits...'
+                sh ('npm run ssu-v3-test')   
+                }                    
+            }
+
+        // stage('Generating Test Reports...') {
+        //     steps {
+        //     sh 'npm run report:history && npm run report.ci'
+        //     script {
+        //             allure([
+        //                     includeProperties: false,
+        //                     jdk: '',
+        //                     properties: [],
+        //                     reportBuildPolicy: 'ALWAYS',
+        //                     results: [[path: 'target/allure-results']]
+        //             ])
+        //     }   
+        //     }
+        // }
+    }
+    post{
+        success{
+            echo 'The Automation finish successfully'
+            slackSend (channel: 'ssu_v2_plus_daily_run', tokenCredentialId: 'ssu_v2_plus_daily_run' , color: '#417a2a', message: "\n *SSU V3 LATAM automation test pipeline*: \n The build No. *${BUILD_NUMBER}* was successful based on the changes on the *${GIT_BRANCH}* branch \n\n To see the automation results please <${ALLURE_URL}/${BUILD_NUMBER}/allure|*follow this link*> \n ")
+        }
+
+        failure{
+            echo 'Something went wrong'
+            slackSend (channel: 'ssu_v2_plus_daily_run', tokenCredentialId: 'ssu_v2_plus_daily_run' , color: '#a8120a', message: "\n *SSU V3 LATAM automation test pipeline*: \n The build *No.${BUILD_NUMBER}* has failed tests, please review the *${GIT_BRANCH}* branch \n\n To see the automation results please <${ALLURE_URL}/${BUILD_NUMBER}/allure|*follow this link*> \n ")
+        }
+        always{
+            sh 'npm run report:history && npm run report.ci'
+           script {
+                    allure([
+                            includeProperties: false,
+                            jdk: '',
+                            properties: [],
+                            reportBuildPolicy: 'ALWAYS',
+                            results: [[path: 'target/allure-results']]
+                    ])
+            }
+             script{
+                def summary = junit(testResults: '**/junit/*.xml')
+                if("${summary.totalCount}" == "${summary.passCount}") {
+                    slackSend (channel: 'ssu_v2_plus_daily_run', tokenCredentialId: 'ssu_v2_plus_daily_run' , color: '#417a2a', message: "\n *SSU squad LATAM total test cases* - ${summary.totalCount}, *Failures* - ${summary.failCount}, *Skipped* - ${summary.skipCount}, *Passed* - ${summary.passCount}")
+                }
+                else if("${summary.totalCount}" == "${summary.failCount}"){
+                    slackSend (channel: 'ssu_v2_plus_daily_run', tokenCredentialId: 'ssu_v2_plus_daily_run' , color: '#a8120a', message: "\n *SSU squad LATAM total test cases* - ${summary.totalCount}, *Failures* - ${summary.failCount}, *Skipped* - ${summary.skipCount}, *Passed* - ${summary.passCount}")
+                }
+                else{
+                    slackSend (channel: 'ssu_v2_plus_daily_run', tokenCredentialId: 'ssu_v2_plus_daily_run' , color: '#FFFF00', message: "\n *SSU squad LATAM total test cases* - ${summary.totalCount}, *Failures* - ${summary.failCount}, *Skipped* - ${summary.skipCount}, *Passed* - ${summary.passCount}")
+                }
+            } 
+        }
+    }
+}

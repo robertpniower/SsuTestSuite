@@ -3,7 +3,7 @@ pipeline {
     environment{
         BASE_JENKINS_URL = 'https://sf-qa-automation.sfplatform.deliveryhero.io/job/Pipelines/job/SSU_V3_Pipelines/job/LATAM_SSU_V3_Pipeline/'
         ALLURE_URL = 'https://sf-qa-automation.sfplatform.deliveryhero.io/job/Pipelines/job/SSU_V3_Pipelines/job/LATAM_SSU_V3_Pipeline/'
-        BASE_REPO_URL = 'https://github.com/deliveryhero/dh-salesforce-async-ui-automation/commit'
+        BASE_REPO_URL = 'https://github.com/robertpniower/SsuTestSuite.git'
         STAGEQAAUTO_USERNAME = credentials('STAGEQAAUTO_USERNAME')
         STAGEQAAUTO_KEY = credentials('STAGEQAAUTO_KEY')
         SSU_SF_CLIENT_ID_UAT = credentials('SSU_SF_CLIENT_ID_UAT')

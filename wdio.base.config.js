@@ -1,6 +1,7 @@
 require('dotenv').config();
-const utilities = require("./Utilities/utilities");
+const fs = require('fs');
 const path = require('path');
+const childProcess = require('child_process');
 
 exports.config = {
     runner: 'local',
@@ -29,15 +30,25 @@ exports.config = {
     },
 
     onPrepare: () => {
-        utilities.deleteAllureJunitReports();
+        const allureDir = path.resolve(__dirname, 'allure-results');
+        if (fs.existsSync(allureDir)) {
+            fs.rmSync(allureDir, { recursive: true, force: true });
+            console.log('Allure reports directory deleted.');
+        } else {
+            console.log('No Allure reports directory found.');
+        }
     },
 
     beforeSuite: async () => {
         await browser.url('/');
         await browser.maximizeWindow();
-        await (await $('#username')).setValue(process.env.USERNAME);
-        await (await $('#password')).setValue(process.env.PASSWORD);
-        await (await $('#Login')).click();
+        const usernameField = await $('#username');
+        const passwordField = await $('#password');
+        const loginButton = await $('#Login');
+
+        await usernameField.setValue(process.env.USERNAME);
+        await passwordField.setValue(process.env.PASSWORD);
+        await loginButton.click();
     },
 
     afterTest: async (test, context, { passed }) => {
@@ -48,17 +59,30 @@ exports.config = {
 
     onComplete: (exitCode) => {
         try {
-            const envProps = utilities.retrunEnvironmentInfosInForAllure();
-            utilities.writeEnvironmentProperties('./allure-results', 'environment.properties', envProps);
+            const envProps = `
+                BROWSER=chrome
+                BASE_URL=${process.env.BASE_URL || 'https://test.salesforce.com'}
+                HEADLESS=${process.env.HEADLESS}
+            `;
+            const envFilePath = path.resolve(__dirname, 'allure-results', 'environment.properties');
+            fs.writeFileSync(envFilePath, envProps);
+            console.log('Environment properties written to Allure.');
+
             console.log('Generating Allure report...');
-            utilities.generateAllureReport();
+            childProcess.execSync('allure generate allure-results --clean && allure open', { stdio: 'inherit' });
         } catch (e) {
             console.error('Error in onComplete:', e.message);
         }
     },
 
     beforeTest: () => {
-        utilities.configureChaiAndWebDriver();
-        utilities.setWdioBrowserTimeout();
+        const chai = require('chai');
+        chai.use(require('chai-webdriverio').default);
+
+        browser.setTimeout({
+            'pageLoad': 10000,
+            'implicit': 8000
+        }
+        );
     },
 };

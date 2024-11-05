@@ -1,0 +1,18 @@
+{
+    "LATAM": {
+        "AR": {
+            "landingPage": {
+                "qa": "https://landing-ar-qa.ssu.deliveryhero.net",
+                "uat": "https://landing-ar-uat.ssu.deliveryhero.net/es"
+            }
+        }
+    },
+    "MENA": {
+        "AE": {
+            "landingPage": {
+                "qa": "https://landing-ae-qa.ssu.deliveryhero.net",
+                "uat": "https://landing-ae-uat.ssu.deliveryhero.net"
+            }
+        }
+    }
+}

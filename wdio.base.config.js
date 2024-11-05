@@ -77,7 +77,12 @@ exports.config = {
 
     beforeTest: () => {
         const chai = require('chai');
-        chai.use(require('chai-webdriverio').default);
+        const chaiWebdriver = require('chai-webdriverio').default;
+
+        chai.use(chaiWebdriver(browser));
+        global.assert = chai.assert;
+        global.should = chai.should;
+        global.expect = chai.expect;
 
         browser.setTimeout({
             'pageLoad': 10000,

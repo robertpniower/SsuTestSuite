@@ -4,6 +4,7 @@ let csvToJson = require('convert-csv-to-json');
 const fs = require('fs');
 const countryConfig = require('../Objects/countryConfig.json');
 const Operations = require('../Utilities/Operations');
+const Utility = require('./utility');
 
 class CommonUtils {
 
@@ -82,7 +83,6 @@ class CommonUtils {
     }
 
     /**
-* @dineshwarandh
 * @description - Function to read web elements CSV and return it as a JSON object
 * @param {*} filePath - Absolute Path to the elements File
 * @param {*} country - Country Name
@@ -121,7 +121,7 @@ class CommonUtils {
             return {};
         }
 
-        let testDataArray = await Utilities.getTest_rowData_fromCSVFile_and_convertToJSON(filePath, testScriptName, false);
+        let testDataArray = await Utility.getTest_rowData_fromCSVFile_and_convertToJSON(filePath, testScriptName, false);
         let formattedTestData = {};
 
         if (testDataArray) {
@@ -160,16 +160,16 @@ class CommonUtils {
 
         switch (dataType) {
             case "randomcharacter":
-                data = await Operations.generateRandomCharactersString(minLength);
+                data = await Utility.generateRandomCharactersString(minLength);
                 break;
             case "randomnumber":
-                data = await RandomDataGenerator.generateRandomFixedNumber(minLength);
+                data = await Utility.generateRandomFixedNumber(minLength);
                 break;
             case "randomsubaddress":
-                data = await RandomDataGenerator.addRandomSubaddressToEmail(minLength);
+                data = await Utility.addRandomSubaddressToEmail(minLength);
                 break;
             case "randomregexbaseddata":
-                data = await Utilities.generateDataFromRegex(dataFormat);
+                data = await Utility.generateDataFromRegex(dataFormat);
                 break;
             default:
                 console.log(`!!!!!!!!! NO MATCHING DATA TYPE FOR GENERATING RANDOM DATA FOR ${dataType}. PLEASE CHECK !!!!`)
@@ -178,6 +178,39 @@ class CommonUtils {
 
         return String(data);
     }
+
+    /**
+   * @description - iterate all the objects and filter only testdata and remove other fields
+   * @param {testData} - an object containing multiple testdata object
+   * @returns {object} returns only test data as object of objects
+   */
+    async cookieBannerAction(action) {
+        let isCookieBannerDisplayed = false;
+
+        await browser.pause(5000);w3
+        isCookieBannerDisplayed = await browser
+            .$(">>>[data-testid='uc-deny-all-button']")
+            .isDisplayed();
+
+        if(isCookieBannerDisplayed){
+            switch (action.toLocaleLowerCase()) {
+                case "deny":
+                    await browser
+                        .$(">>>[data-testid='uc-deny-all-button']")
+                        .click();
+
+                    break;
+                case "accept":
+                    await browser
+                        .$(">>>[data-testid='uc-accept-all-button']")
+                        .click();
+                    break;
+
+                default:
+                    assert.fail("No Matching Cookie Banner Action");
+            }
+        }
+    }
 }
 
-module.exports = CommonUtils;
+module.exports = new CommonUtils();

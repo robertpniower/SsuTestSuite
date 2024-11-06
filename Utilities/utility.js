@@ -181,17 +181,30 @@ class Utility {
 
     async generateRandomCharacterString(length) {
         let result = '';
+
         for (let i = 0; i < length; i++) {
-            // Generate a random uppercase letter (A-Z)
-            const charCode = Math.floor(Math.random() * 26) + 65;
+            let charCode = Math.floor(Math.random() * 26) + 65;
+
             result += String.fromCharCode(charCode);
         }
+
         return result;
     }
-    
-    // Example usage
-    console.log(generateRandomString(10)); // Outputs a random string of 10 uppercase characters
-    
+
+    async generateRandomFixedNumber(length){
+        return await Math.floor(Math.pow(10, length - 1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length - 1) - 1));
+    }
+
+    async addRandomSubaddressToEmail(email, regex=/^\+[a-z0-9]{9}$/) {
+        //Generate a random alphanumeric character
+        const alphanumericChar = new RandExp(regex).gen();
+        //Split the email into two parts: the part before "@" and the part after "@"
+        const [emailPart1, emailPart2] = email.split('@');
+        //Combine the parts with the added alphanumeric character
+        const modifiedEmail = `${emailPart1}${alphanumericChar}@${emailPart2}`;
+
+        return modifiedEmail;
+    }
 }
 
 module.exports = new Utility();

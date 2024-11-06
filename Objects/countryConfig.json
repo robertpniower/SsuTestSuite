@@ -8,7 +8,7 @@
         }
     },
     "MENA": {
-        "AE": {
+        "TB_AE": {
             "landingPage": {
                 "qa": "https://landing-ae-qa.ssu.deliveryhero.net",
                 "uat": "https://landing-ae-uat.ssu.deliveryhero.net"

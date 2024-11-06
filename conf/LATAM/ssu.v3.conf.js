@@ -1,7 +1,6 @@
 const deepmerge = require('deepmerge');
 const baseConf = require('../../wdio.base.config');
-const commonSoql =  require("../../../Objects/SOQL/common_soql")
-const utilities = require("../../Utilities/utilities");
+const utilities = require("../../Utilities/utility");
 const chromeModheader = require('chrome-modheader');
 
 const CWD = process.env.CI ? process.env.WORKSPACE : process.env.PWD
@@ -16,7 +15,7 @@ exports.config = deepmerge(baseConf.config, {
 
 
 exports.config.specs = [
-     `${CWD}/Tests/SSU_V3_React/LATAM/**/*.js`
+     `${CWD}/Tests/**/*.js`
 ]
 exports.config.capabilities[0].browserVersion = '130.0.6723.69';
 
@@ -35,9 +34,7 @@ exports.config.before = function (capabilities, specs) {
     process.env.SSU_VERSION = "V3React"
     global.datadogApiKey = process.env.datadog_api_key
 
-    commonSoql.get_auth_token(process.env.SSU_SF_CLIENT_ID_UAT, process.env.SSU_SF_CLIENT_SECRET_UAT, process.env.SSU_SF_USERNAME_UAT, process.env.SSU_SF_PASSWORD_UAT, process.env.SFENV).then(accessToken =>{
-        process.env.SSU_SF_ACCESS_TOKEN = accessToken;
-    })
+    
 };
 
 exports.config.onComplete = function (exitCode, config, capabilities, results) {

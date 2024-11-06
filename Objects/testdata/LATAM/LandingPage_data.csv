@@ -1,0 +1,2 @@
+es - AR - E2E Flow SSUv2 LandingPage error messages click,begin_button = || click,,,
+es - AR - E2E Flow SSUv2 LandingPage error messages valid input,first_name = randomCharacter(11) || setvalue,last_name = randomCharacter(7) || setvalue,telephone = randomNumber(11) || addvalue,email = randomsubaddress(salesforce.sales@deliveryhero.com) || setvalue

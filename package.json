@@ -10,7 +10,7 @@
     "eslint": "eslint . --max-warnings=0",
     "eslint-fix": "eslint . --fix",
    
-    "ssu-v3-test": "./node_modules/.bin/wdio ./conf/SSU-V3/LATAM/ssu.v3.conf.js",
+    "ssu-v3-test": "./node_modules/.bin/wdio ./conf/LATAM/ssu.v3.conf.js",
     "ssu-v3-tb-test": "./node_modules/.bin/wdio ./conf/SSU-V3/MENA/ssu.tb.v3.conf.js",
     "ssu-v3-fp-test": "./node_modules/.bin/wdio ./conf/SSU-V3/APAC/ssu.fp.v3.conf.js",
     "ssu-v3-eu-test": "./node_modules/.bin/wdio ./conf/SSU-V3/EU/ssu.eu.v3.conf.js"

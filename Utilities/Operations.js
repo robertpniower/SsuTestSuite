@@ -19,4 +19,4 @@ class Operations {
 
 }
 
-module.exports = Operations;
+module.exports = new Operations();

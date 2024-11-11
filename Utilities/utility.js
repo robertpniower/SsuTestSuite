@@ -4,8 +4,6 @@ const rimraf = require("rimraf");
 var RandExp = require('randexp');
 const fs = require('fs');
 const path = require('path');
-const format = require('date-fns/format');
-const GlobalCountryEntityMapping = require("../Utilities/Entity_Country.json");
 
 class Utility {
 
@@ -205,6 +203,7 @@ class Utility {
 
         return modifiedEmail;
     }
+
 }
 
 module.exports = new Utility();

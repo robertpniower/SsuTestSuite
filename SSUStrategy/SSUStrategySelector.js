@@ -1,5 +1,5 @@
-const PedidisyaARSSUStrategy = require("./PyArSSUStrategy");
-const TalabatUAESSUStrategy = require('./TbAeSSUStrategy')
+const PedidisyaARSsuStrategy = require("./PyArSsuStrategy");
+const TalabatUAESsuStrategy = require('./TbAeSsuStrategy')
 const { assert } = require("chai");
 
 class SSUStrategySelector {
@@ -9,13 +9,17 @@ class SSUStrategySelector {
 
         switch (testCaseAttributes.entity) {
             case "PY_AR":
-                strategy = new PedidisyaARSSUStrategy(testCaseAttributes)
+                strategy = new PedidisyaARSsuStrategy(testCaseAttributes)
                 break;
             case "TB_AE":
-                strategy = new TalabatUAESSUStrategy(testCaseAttributes)
+                strategy = new TalabatUAESsuStrategy(testCaseAttributes)
                 break;
             default:
                 break;
         }
+
+        return strategy;
     }
 }
+
+module.exports = new SSUStrategySelector();

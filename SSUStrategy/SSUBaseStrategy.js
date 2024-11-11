@@ -1,5 +1,5 @@
 
-class SSUBaseStrategy {
+class SsuBaseStrategy {
     constructor(strategy) {
         this.strategy = strategy;
     }
@@ -45,4 +45,4 @@ class SSUBaseStrategy {
     }
 }
 
-module.exports = SSUBaseStrategy;
+module.exports = SsuBaseStrategy;

@@ -3,8 +3,9 @@ const { assert } = require("chai");
 let csvToJson = require('convert-csv-to-json');
 const fs = require('fs');
 const countryConfig = require('../Objects/countryConfig.json');
-const Operations = require('../Utilities/Operations');
+const Operations = require('../Operations/Operations');
 const Utility = require('./utility');
+const UiExecutor = require("../UiExecutor/UiExecutor")
 
 class CommonUtils {
 
@@ -160,7 +161,7 @@ class CommonUtils {
 
         switch (dataType) {
             case "randomcharacter":
-                data = await Utility.generateRandomCharactersString(minLength);
+                data = await Utility.generateRandomCharacterString(minLength);
                 break;
             case "randomnumber":
                 data = await Utility.generateRandomFixedNumber(minLength);
@@ -187,7 +188,7 @@ class CommonUtils {
     async cookieBannerAction(action) {
         let isCookieBannerDisplayed = false;
 
-        await browser.pause(5000);w3
+        await browser.pause(5000);
         isCookieBannerDisplayed = await browser
             .$(">>>[data-testid='uc-deny-all-button']")
             .isDisplayed();
@@ -211,6 +212,91 @@ class CommonUtils {
             }
         }
     }
+
+    async waitForV3Loader(){
+        const v3LoaderLocator = ".MuiLinearProgress-indeterminate"
+
+        try{
+            await browser.$(v3LoaderLocator).waitForDisplayed();
+        }
+        catch{
+            allureReporter.addStep(`Loader didn't display `);
+        }
+
+        await browser.$(v3LoaderLocator).waitForExist({reverse:true, timeout:40000});
+    }
+
+    async assertText(element, data) {
+        const text = await Operations.toGetText(element);
+        const formattedText = text.replaceAll('\n', '');
+
+        assert.equal(formattedText, data, `Text did not match for element with text: ${formattedText}`);
+        allureReporter.addStep(`Asserted '${data}' in element with text: ${formattedText}`);
+        console.log(`Asserted '${data}' in element with text: ${formattedText}`);
+        console.log(`Text of Element ${element.selector}: ${formattedText}`);
+    }
+
+    /**
+   * @robertpniowerdh
+   * afunction to select all dropVerticalSegments in SSU BussinesDetailsPage
+   * @param verticalValue -Array containing the values from VerticalSegment
+   * @param businessPageElements -locators of businessDetailsPage
+    */
+    async fillVerticalSegmentField(verticalValues, businessPageElements) {
+
+        for (let i = 0; i < verticalValues.length; i++) {
+
+            const verticalSegment = await browser.$(businessPageElements['vertical_segment'].locator);
+            const verticalItem = verticalValues[i]
+
+            await Operations.waitForPageLoad();
+            await verticalSegment.waitForExist();
+            await verticalSegment.waitForDisplayed();
+            await UiExecutor.selectListElementDropdownValue(verticalSegment, verticalItem, "visibleText");
+            allureReporter.addStep(`Selected ${verticalItem} in dropdown element`);
+
+            const continueButton = await browser.$(businessPageElements['continue_button'].locator);
+
+            await continueButton.waitForExist();
+            await continueButton.waitForDisplayed();
+            await Operations.toClick(continueButton);
+            await Operations.waitForPageLoad();
+
+            await Operations.waitUntilURLContainsText("address-details", "Err: Address-Details Page did not load", 500000, 3000);
+
+            const backButton = await browser.$(businessPageElements['atras_button'].locator);
+
+            await backButton.waitForExist();
+            await backButton.waitForDisplayed();
+            await Operations.toClick(backButton);
+
+        }
+    }
+
+    /**
+   * @robertpniowerdh
+   * function to transition from LandinPage to BusinessDetailsPage
+   * @param verticalValue -Array containing the values from VerticalSegment
+   * @param businessPageElements -locators of businessDetailsPage
+    */
+    async transitionToBusinessDetailsPage(landingPageElements) {
+        await Operations.waitForPageLoad();
+
+        let currentURL = await browser.getUrl();
+        let bussinessURL = currentURL.replace('?lng=en', '/account-details/business-details');
+
+        await browser.url(bussinessURL);
+        await Operations.waitForPageLoad();
+
+        let timeLineButton = await browser.$(landingPageElements['timeline_continue_button'].locator);
+
+        await Operations.toClick(timeLineButton);
+
+        let timeLineButton1 = await browser.$(landingPageElements['timeline_page1_continue_button'].locator);
+
+        await Operations.toClick(timeLineButton1);
+    }
+
 }
 
 module.exports = new CommonUtils();

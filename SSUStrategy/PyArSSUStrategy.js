@@ -1,5 +1,5 @@
 const { assert } = require("chai");
-const CommonSSUStrategy = require('./CommonSSUStrategy')
+const CommonSSUStrategy = require('./CommonSsuStrategy')
 
 class PedidisyaARSSUStrategy extends CommonSSUStrategy {
     constructor(testCaseAttributes){

@@ -1,29 +1,20 @@
 const { assert } = require("chai");
-const UIExecutor = require("../../../../../Objects/SSU_Common/v3React/UIExecutor/uiExecutor.js")
-const Operations = require("../../../../../Utilities/Operations");
-const Utilities = require("../../../../../Utilities/utilities.js");
-const SSUCommonUtils = require("../../../v2plus/commonUtils");
-const translations = require("../../../../../Objects/SSU_Common/v2plus/translations/Field_Mappings_Country");
-const translationsReviewPageSection = require("../../../../../Objects/SSU_Common/v2plus/translations/ReviewPageSectionMappingCountry.js");
-const oneWebUtils = require("./oneWebUtils.js");
-const SSUConstants = require('../../../../../Objects/SSU_Common/Constants/SSU_Constants.js');
-const serviceRequestSOQL = require("../../../../../Objects/SOQL/serviceRequestSOQL");
-const emailSubjects = require("../../../../../Objects/SSU_Common/v2plus/translations/EmailSubjects");
-const TestResult =require("../../../../../Utilities/Reporting/TestResult");
+const UIExecutor = require("../UiExecutor/UiExecutor.js")
+const Operations = require("../Operations/Operations.js");
+const Utilities = require("../Utilities/utility.js");
+const SSUCommonUtils = require("../Utilities/commonUtils.js");
 let allureReporter = require("@wdio/allure-reporter").default;
 
 class CommonSsuValidator {
 
     async submitLandingPage(elements, testData){
         allureReporter.addStep("INSIDE Submit Landing page method");
-        TestResult.teststeps.push("INSIDE Submit Landing page method");
         await UIExecutor.performUIInteractions(elements, testData);
 
     }
 
     async submitBusinessDetailsPage(elements, testData) {
         allureReporter.addStep("INSIDE Submit business details page");
-        TestResult.teststeps.push("INSIDE Submit business details page");
         await Operations.waitForPageLoad();
         await UIExecutor.performUIInteractions(elements, testData);
         await SSUCommonUtils.waitForV3Loader();
@@ -32,7 +23,6 @@ class CommonSsuValidator {
 
     async submitAddressDetailsPage(elements, testData) {
         allureReporter.addStep("INSIDE Submit address details page");
-        TestResult.teststeps.push("INSIDE Submit address details page");
         await Operations.waitForPageLoad();
         await UIExecutor.performUIInteractions(elements, testData);
         await SSUCommonUtils.waitForV3Loader();
@@ -41,7 +31,6 @@ class CommonSsuValidator {
 
     async verifyFooterLinks(testCaseAttributes, elements, links) {
         allureReporter.addStep("INSIDE Verify Footer Links");
-        TestResult.teststeps.push("INSIDE Verify Footer Links");
 
         if (testCaseAttributes.region === "LATAM") {
             links[testCaseAttributes.country + "_link"] = "#"
@@ -65,7 +54,6 @@ class CommonSsuValidator {
 
             if (linkElement) {
                 allureReporter.addStep(`Testing link: ${linkElement}`)
-                TestResult.teststeps.push(`Testing link: ${linkElement}`);
 
                 let element = await browser.$(elementInfo.locator)
 
@@ -84,7 +72,6 @@ class CommonSsuValidator {
 
     async verifyFaqSectionText(elements, faqData, country) {
         allureReporter.addStep("INSIDE Verify FAQ Section");
-        TestResult.teststeps.push("INSIDE Verify FAQ Section");
 
         await Operations.waitForPageLoad();
         let faqSection = elements['faq_section'];
@@ -133,7 +120,6 @@ class CommonSsuValidator {
 
     async validateVerticalSegment(language, dropVerticalSegments, verticalValues) {
         allureReporter.addStep("INSIDE Validate Vertical Segment Test");
-        TestResult.teststeps.push("INSIDE Validate Vertical Segment Test");
         await Operations.waitForPageLoad();
         let translatedValues = dropVerticalSegments.map(obj => obj.verticalSegmentTranslated[language]);
         let translatedValuesSorted = translatedValues.sort();
@@ -161,7 +147,6 @@ class CommonSsuValidator {
         console.log(`categorySegments: ${translatedValuesSorted}`);
 
         allureReporter.addStep(`Asserting that categoryValues are equal to categorySegments`);
-        TestResult.teststeps.push(`Asserting that categoryValues are equal to categorySegments`);
         expect(translatedValuesSorted).to.deep.equal(verticalValuesSorted);
 
         return verticalValuesSorted;
@@ -179,7 +164,6 @@ class CommonSsuValidator {
         console.log(`categories: ${translatedValuesSorted}`);
 
         allureReporter.addStep(`Asserting that verticalValues are equal to verticalSegments`);
-        TestResult.teststeps.push(`Asserting that verticalValues are equal to verticalSegments`);
         expect(translatedValuesSorted).to.deep.equal(verticalValuesSorted);
 
         return verticalValuesSorted;

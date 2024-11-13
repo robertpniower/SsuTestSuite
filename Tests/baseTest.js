@@ -2,15 +2,17 @@ const SSUStrategySelector = require('../SSUStrategy/SsuStrategySelector');
 const CommonUtils = require('../Utilities/commonUtils');
 const SsuBaseStrategy = require('../SSUStrategy/SSUBaseStrategy');
 const landingPageFaqData = require("../Objects/faqValidationData/faqData.json");
+const UiExecutor = require('../UiExecutor/UiExecutor');
+const errorMessages = require('../Objects/errorMessages/errorMessages.json')
 
 class BaseTest {
     constructor(testCaseAttributes) {
         return (async () => {
             this.testCaseAttributes = testCaseAttributes;
             this.landingPageElements = await CommonUtils.getElementsFromCSV(`./Objects/locators/${testCaseAttributes.region}/LandingPage.csv`, testCaseAttributes.country);
-            this.landingPageTestData = await CommonUtils.loadTestDataFromCSV(`./Objects/SSU_Common/v3React/testData/${testCaseAttributes.region}/LandingPage_data.csv`, testCaseAttributes.testCaseName);
-            this.businessPageElements = await CommonUtils.getElementsFromCSV(`./Objects/SSU_Common/v3React/locators/${testCaseAttributes.region}/BusinessDetailsPage.csv`, testCaseAttributes.country, true, false);
-            this.businessPageTestData = await CommonUtils.loadTestDataFromCSV(`./Objects/SSU_Common/v3React/testData/${testCaseAttributes.region}/BusinessDetailsPage_data.csv`, testCaseAttributes.testCaseName);
+            this.landingPageTestData = await CommonUtils.loadTestDataFromCSV(`./Objects/testData/${testCaseAttributes.region}/LandingPage_data.csv`, testCaseAttributes.testCaseName);
+            this.businessPageElements = await CommonUtils.getElementsFromCSV(`./Objects/locators/${testCaseAttributes.region}/BusinessDetailsPage.csv`, testCaseAttributes.country, true, false);
+            this.businessPageTestData = await CommonUtils.loadTestDataFromCSV(`./Objects/testData/${testCaseAttributes.region}/BusinessDetailsPage_data.csv`, testCaseAttributes.testCaseName);
             this.country = testCaseAttributes.country;
             this.ssuStrategy = new SsuBaseStrategy(await SSUStrategySelector.selectStrategy(testCaseAttributes));
 
@@ -24,6 +26,30 @@ class BaseTest {
         await this.ssuStrategy.verifyFaqSectionText(this.landingPageElements, landingPageFaqData[this.testCaseAttributes.region][this.testCaseAttributes.country][this.testCaseAttributes.language], this.testCaseAttributes.country);
 
     }
+
+    async varifyErrorMessages() {
+        await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV, this.testCaseAttributes.language);
+        await UiExecutor.performUIInteractions(this.landingPageElements, this.landingPageTestData);
+        await this.ssuStrategy.verifyErrorMessages(this.landingPageElements, errorMessages, this.country, this.testCaseAttributes.checkDisplayed);
+    }
+
+    async validateVerticalSegmentTest(verticalSegments) {
+        await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
+        await CommonUtils.cookieBannerAction("deny")
+        await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData);
+        let verticalSegment = await browser.$(this.businessPageElements['vertical_segment'].locator);
+        let verticalValues = await UiExecutor.getAllDropdownOptions(verticalSegment);
+        let dropVerticalSegments = verticalSegments.filter(verticalSegment => verticalSegment.verticalSegment !== 'Regular Restaurant');
+
+        await this.ssuStrategy.validateVerticalSegment(this.testCaseAttributes.language, dropVerticalSegments, verticalValues);
+
+        await browser.refresh();
+
+        await UiExecutor.performUIInteractions(this.businessPageElements, this.businessPageTestData);
+
+        await CommonUtils.fillVerticalSegmentField(verticalValues, this.businessPageElements);
+    }
+
 }
 
 module.exports = BaseTest;

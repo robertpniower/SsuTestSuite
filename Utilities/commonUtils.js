@@ -226,6 +226,27 @@ class CommonUtils {
         await browser.$(v3LoaderLocator).waitForExist({reverse:true, timeout:40000});
     }
 
+    /**
+  * @description - Function to get relevant error message fields and locators
+  * @param {*} elements - locator Object
+  * @param {*} country - Country Name
+  */
+    async getErrorFields(elements, country) {
+        const errorFields = [];
+
+        for (const [fieldName, element] of Object.entries(elements)) {
+            if (
+                element['elementType'] === 'Text' &&
+        element['locatorType'] === 'custom' &&
+        element['countries'].includes(country)
+            ) {
+                errorFields.push(fieldName);
+            }
+        }
+
+        return errorFields;
+    }
+
     async assertText(element, data) {
         const text = await Operations.toGetText(element);
         const formattedText = text.replaceAll('\n', '');

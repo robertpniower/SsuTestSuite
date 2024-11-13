@@ -1,0 +1,129 @@
+[
+    {
+      "verticalSegment": "hypermarket",
+      "verticalSegmentTranslated": { "es": "Hipermercado" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "Supermarket",
+      "verticalSegmentTranslated": { "es": "Supermercado" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "Convenience",
+      "verticalSegmentTranslated": { "es": "Minimercados" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "fruits_and_vegetables",
+      "verticalSegmentTranslated": { "es": "Frutas y verduras" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "Butchery",
+      "verticalSegmentTranslated": { "es": "Carnicería" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "snacks_and_sweets",
+      "verticalSegmentTranslated": { "es": "Chocolatería / Golosinas" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "pasta_shop",
+      "verticalSegmentTranslated": { "es": "Pasta fresca" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "frozen_food",
+      "verticalSegmentTranslated": { "es": "Congelados" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "gourmet",
+      "verticalSegmentTranslated": { "es": "Gourmet/Fiambrería" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "dairy_products",
+      "verticalSegmentTranslated": { "es": "Lácteos" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "nuts_and_dried_fruits",
+      "verticalSegmentTranslated": { "es": "Tienda Natural y productos saludables / Dietética" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "health_and_wellness",
+      "verticalSegmentTranslated": { "es": "Suplementos" },
+      "drop": true,
+      "hasCategory": true
+    },
+    {
+      "verticalSegment": "Tobacco",
+      "verticalSegmentTranslated": { "es": "Vapes & Tabaco" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "Beauty",
+      "verticalSegmentTranslated": { "es": "Salud & Belleza" },
+      "drop": true,
+      "hasCategory": true
+    },
+    {
+      "verticalSegment": "Pharmacy",
+      "verticalSegmentTranslated": { "es": "Farmacia" },
+      "drop": true,
+      "hasCategory": true
+    },
+    {
+      "verticalSegment": "mother_and_baby",
+      "verticalSegmentTranslated": { "es": "Mamás y Bebés / Pañales" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "kiosks",
+      "verticalSegmentTranslated": { "es": "Kioskos" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "alcoholic_drinks",
+      "verticalSegmentTranslated": { "es": "Bebidas" },
+      "drop": true,
+      "hasCategory": true
+    },
+    {
+      "verticalSegment": "Pets",
+      "verticalSegmentTranslated": { "es": "Mascotas" },
+      "drop": true,
+      "hasCategory": true
+    },
+    {
+      "verticalSegment": "Fishery",
+      "verticalSegmentTranslated": { "es": "Pescadería" },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "Regular Restaurant",
+      "verticalSegmentTranslated": { "es": "Restaurante" },
+      "drop": false,
+      "hasCategory": true
+    }
+  ]
+  

@@ -7,7 +7,7 @@ let allureReporter = require("@wdio/allure-reporter").default;
 
 class CommonSsuValidator {
 
-    async submitLandingPage(elements, testData){
+    async submitLandingPage(elements, testData) {
         allureReporter.addStep("INSIDE Submit Landing page method");
         await UIExecutor.performUIInteractions(elements, testData);
 
@@ -27,6 +27,53 @@ class CommonSsuValidator {
         await UIExecutor.performUIInteractions(elements, testData);
         await SSUCommonUtils.waitForV3Loader();
         await Operations.waitForPageLoad();
+    }
+
+    async verifyErrorMessages(elements, expectedErrorMessages, country, checkDisplayed) {
+        allureReporter.addStep(`Checking if error messsages are displayed`);
+        const displayedErrorMessages = [];
+
+        try {
+            const errorFields = await SSUCommonUtils.getErrorFields(elements, country);
+            let errorMessagesFound = false;
+
+            for (const fieldName of errorFields) {
+                const element = elements[fieldName];
+                const errorMessage = $(`${element.locator}`);
+
+                if (await errorMessage.isDisplayed()) {
+                    const actualErrorMessage = (await errorMessage.getText()).trim();
+
+                    if (actualErrorMessage !== '') {
+                        displayedErrorMessages.push(actualErrorMessage);
+                        errorMessagesFound = true;
+
+                        if (checkDisplayed) {
+                            console.log(`Displayed error message: ${actualErrorMessage} in Field: ${fieldName}`);
+                            allureReporter.addStep(`Displayed error message: ${actualErrorMessage} in Field: ${fieldName}`);
+
+                            if (expectedErrorMessages[fieldName]) {
+                                expect(actualErrorMessage).to.equal(expectedErrorMessages[fieldName]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return (errorMessagesFound && checkDisplayed) || (!errorMessagesFound && !checkDisplayed);
+
+            if (checkDisplayed && displayedErrorMessages.length > 0) {
+                console.log('Error messages are displayed.');
+                allureReporter.addStep(`Error messages are displayed.`);
+            } else if (!checkDisplayed && displayedErrorMessages.length === 0) {
+                console.log('Error messages are not displayed.');
+                allureReporter.addStep(`Error messages are not displayed.`);
+            }
+        } catch (error) {
+            console.error('Error occurred during error message verification:', error);
+            allureReporter.addStep('Error occurred during error message verification:', error)
+            throw error;
+        }
     }
 
     async verifyFooterLinks(testCaseAttributes, elements, links) {
@@ -137,7 +184,6 @@ class CommonSsuValidator {
 
     async validateCategory(language, dropVerticalSegments, categoryValues) {
         allureReporter.addStep("INSIDE Validate Vertical Segment Test");
-        TestResult.teststeps.push("INSIDE Validate Vertical Segment Test");
         await Operations.waitForPageLoad();
         let translatedValues = dropVerticalSegments.map(obj => obj.categories.categoryTranslated[language]);
         let translatedValuesSorted = translatedValues.sort();

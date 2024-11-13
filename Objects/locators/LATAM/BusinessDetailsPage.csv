@@ -1,0 +1,11 @@
+field Name,locator,locator Type,mandatory,element Type,countries,dependent Field,dependent Field Value
+business_name,business.name,name,TRUE,textField,*AR
+vertical_segment,test-business.verticalSegment,data-testid,TRUE,dropdown,*AR
+category,test-business.categories,data-testid,TRUE,multiDropdown,*AR
+branches,business.numberOfLocations,name,TRUE,textField,*AR
+branding_status,field-brandingStatus,data-testid,TRUE,radioButton,*AR
+preferred_contact_method,test-contact.contactMethod,data-testid,TRUE,dropdown,*AR
+business_telephone,business.phoneNumber,name,TRUE,textField,*AR
+vertical,test-business.vertical,data-testid,TRUE,dropdown,*AR
+continue_button,"""//button[contains(text(),'Continuar')]""",custom,TRUE,button,*AR
+atras_button,"""//button[contains(text(),'Atrás')]""",custom,TRUE,button,*AR

@@ -1,0 +1,8 @@
+{
+    "AR": {
+        "first_name_error_message": "Completa este campo.",
+        "last_name_error_message": "Completa este campo.",
+        "phone_error_message": "La cantidad de digitos no puede ser menor de 10 ni mayor a 11 seguido del +549",
+        "email_error_message": "Completa este campo."
+    }
+}

@@ -61,6 +61,10 @@ class Utility {
 
     }
 
+    __sanitizeFilePath(filePath) {
+        return filePath.replace(/^(\.\.(\/|\\|$))+/, '');
+    }
+
     /**
     * @description : Generate random expression
     * @param {*} exp Expression pattern

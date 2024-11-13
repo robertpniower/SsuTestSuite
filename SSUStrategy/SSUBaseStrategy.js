@@ -12,16 +12,16 @@ class SsuBaseStrategy {
         await this.strategy.submitLandingPage(testElements, testData);
     }
 
-    async submitRecoveryPage(testElements, testData){
-        await this.strategy.submitRecoveryPage(testElements, testData);
-    }
-
     async submitBusinessDetailsPage(testElements, testData){
         await this.strategy.submitBusinessDetailsPage(testElements, testData );
     }
 
     async submitAddressDetailsPage(testElements, testData){
         await this.strategy.submitAddressDetailsPage(testElements, testData );
+    }
+
+    async verifyErrorMessages(testElements, expectedErrorMessages, country,checkDisplayed) {
+        await this.strategy.verifyErrorMessages(testElements, expectedErrorMessages, country, checkDisplayed);
     }
 
     async verifyFooterLinks(country, testElements, testData) {

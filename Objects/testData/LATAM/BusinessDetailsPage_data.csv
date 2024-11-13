@@ -1,0 +1,1 @@
+AR Shop Validate VerticalSegment Test,business_name = randomCharacter(10) || waitforelementtobedispalyed;waitforelementtobeenabled;setvalue ,branches = 1 || clearandsetvalue, preferred_contact_method = WhatsApp  || selectdropdownbytext,business_telephone = randomNumber(11) || addvalue,,,,,

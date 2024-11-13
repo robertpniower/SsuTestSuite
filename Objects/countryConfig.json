@@ -4,7 +4,8 @@
             "landingPage": {
                 "qa": "https://landing-ar-qa.ssu.deliveryhero.net",
                 "uat": "https://landing-ar-uat.ssu.deliveryhero.net/es"
-            }
+            }, "v3Website": "https://pedidosya.com.ar"
+            
         }
     },
     "MENA": {
@@ -12,7 +13,8 @@
             "landingPage": {
                 "qa": "https://landing-ae-qa.ssu.deliveryhero.net",
                 "uat": "https://landing-ae-uat.ssu.deliveryhero.net"
-            }
+            }, "v3Website":  "https://talabat.com/uae"
+            
         }
     }
 }

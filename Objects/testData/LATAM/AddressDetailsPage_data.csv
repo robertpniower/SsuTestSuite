@@ -1,0 +1,1 @@
+AR Shop Drop Test,address = KFC Carlos Pellegrini;Carlos Pellegrini || search , street = Carlos Pellegrini  || assertvalue, street_number = 435 || assertvalue,zipcode = C1010 || assertvalue,state = Ciudad Autónoma de Buenos Aires || assertvalue,city = Buenos Aires || assertvalue,continue_button = || click,

@@ -13,6 +13,8 @@ class BaseTest {
             this.landingPageTestData = await CommonUtils.loadTestDataFromCSV(`./Objects/testData/${testCaseAttributes.region}/LandingPage_data.csv`, testCaseAttributes.testCaseName);
             this.businessPageElements = await CommonUtils.getElementsFromCSV(`./Objects/locators/${testCaseAttributes.region}/BusinessDetailsPage.csv`, testCaseAttributes.country, true, false);
             this.businessPageTestData = await CommonUtils.loadTestDataFromCSV(`./Objects/testData/${testCaseAttributes.region}/BusinessDetailsPage_data.csv`, testCaseAttributes.testCaseName);
+            this.addressPageElements =  await CommonUtils.getElementsFromCSV(`./Objects/locators/${testCaseAttributes.region}/AddressDetailsPage.csv`, testCaseAttributes.country, true, true);
+            this.addressPageTestData =  await CommonUtils.loadTestDataFromCSV(`./Objects/testData/${testCaseAttributes.region}/AddressDetailsPage_data.csv`, testCaseAttributes.testCaseName);
             this.country = testCaseAttributes.country;
             this.ssuStrategy = new SsuBaseStrategy(await SSUStrategySelector.selectStrategy(testCaseAttributes));
 
@@ -48,6 +50,18 @@ class BaseTest {
         await UiExecutor.performUIInteractions(this.businessPageElements, this.businessPageTestData);
 
         await CommonUtils.fillVerticalSegmentField(verticalValues, this.businessPageElements);
+    }
+
+    async shopNonPrioritizedVerticalSegmentDropTest(verticalSegment){
+        await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
+
+        this.businessPageTestData.vertical_segment.data = verticalSegment.verticalSegmentTranslated[this.testCaseAttributes.language]
+        await CommonUtils.cookieBannerAction("deny")
+        await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData);
+        await this.ssuStrategy.submitBusinessDetailsPage(this.businessPageElements,this.businessPageTestData);
+        await this.ssuStrategy.submitAddressDetailsPage(this.addressPageElements, this.addressPageTestData)
+        await CommonUtils.validateVerticalSegmentDropPage(this.businessPageTestData.vertical_segment.data, this.country, this.testCaseAttributes)
+
     }
 
 }

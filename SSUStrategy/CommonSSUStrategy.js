@@ -183,7 +183,7 @@ class CommonSsuValidator {
     }
 
     async validateCategory(language, dropVerticalSegments, categoryValues) {
-        allureReporter.addStep("INSIDE Validate Vertical Segment Test");
+        allureReporter.addStep("INSIDE Validate Category Test");
         await Operations.waitForPageLoad();
         let translatedValues = dropVerticalSegments.map(obj => obj.categories.categoryTranslated[language]);
         let translatedValuesSorted = translatedValues.sort();
@@ -193,23 +193,6 @@ class CommonSsuValidator {
         console.log(`categorySegments: ${translatedValuesSorted}`);
 
         allureReporter.addStep(`Asserting that categoryValues are equal to categorySegments`);
-        expect(translatedValuesSorted).to.deep.equal(verticalValuesSorted);
-
-        return verticalValuesSorted;
-
-    }
-
-    async validateCategoryValues(language, dropVerticalSegments, verticalValues) {
-        allureReporter.addStep("INSIDE Validate Vertical Segment Test");
-        await Operations.waitForPageLoad();
-        let translatedValues = dropVerticalSegments.map(obj => obj.categoryTranslated[language]);
-        let translatedValuesSorted = translatedValues.sort();
-        let verticalValuesSorted = verticalValues.sort();
-
-        console.log(`categoryValues: ${verticalValuesSorted}`);
-        console.log(`categories: ${translatedValuesSorted}`);
-
-        allureReporter.addStep(`Asserting that verticalValues are equal to verticalSegments`);
         expect(translatedValuesSorted).to.deep.equal(verticalValuesSorted);
 
         return verticalValuesSorted;

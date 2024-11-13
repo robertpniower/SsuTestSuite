@@ -1,7 +1,8 @@
 field Name,locator,locator Type,mandatory,element Type,countries,dependent Field,dependent Field Value
-address,.MuiAutocomplete-input,custom,TRUE,lookup,*AR;CL,,
-street,address.restaurant.street,name,TRUE,textField,*AR;CL,,
-street_number,address.restaurant.streetNumber,name,TRUE,textField,*AR;CL,,
-zipcode,address.restaurant.zipcode,name,TRUE,textField,*AR;CL,,
-city,address.restaurant.city,name,TRUE,textField,*AR;CL,,
-state,address.restaurant.state,name,TRUE,textField,*AR;CL,,
+address,.MuiAutocomplete-input,custom,TRUE,lookup,*AR,,
+street,address.restaurant.street,name,TRUE,textField,*AR,,
+street_number,address.restaurant.streetNumber,name,TRUE,textField,*AR,,
+zipcode,address.restaurant.zipcode,name,TRUE,textField,*AR,,
+city,address.restaurant.city,name,TRUE,textField,*AR,,
+state,address.restaurant.state,name,TRUE,textField,*AR,,
+continue_button,"""//button[contains(text(),'Continuar')]""",custom,TRUE,button,*AR

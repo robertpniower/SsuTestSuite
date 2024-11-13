@@ -318,6 +318,20 @@ class CommonUtils {
         await Operations.toClick(timeLineButton1);
     }
 
+    async validateVerticalSegmentDropPage(verticalSegment, country, testCaseAttributes){
+        allureReporter.addStep('INSIDE validate Vertical Drop Page')
+        let dropImage = await browser.$("//img[@alt='lead drop image']");
+
+        Operations.waitForElementDisplayed( dropImage, 40000);
+
+        if(testCaseAttributes.region === 'LATAM') {
+            assert.isTrue((await dropImage.$("./preceding-sibling::div/p").getText()).includes(verticalSegment), "Vertical segment name is not displayed in Non-prioritised Vertical segment drop page");
+        }
+
+        let url = await Operations.getAttribute(await dropImage.$("./preceding-sibling::div/a"),'href');
+
+        assert.deepEqual(url, countryConfig[testCaseAttributes.region][country]["v3Website"], "User is not redirected to respective website on clicking button in Drop page");
+    }
 }
 
 module.exports = new CommonUtils();

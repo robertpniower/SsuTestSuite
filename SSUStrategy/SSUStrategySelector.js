@@ -2,7 +2,7 @@ const PedidisyaARSsuStrategy = require("./PyArSsuStrategy");
 const TalabatUAESsuStrategy = require('./TbAeSsuStrategy')
 const { assert } = require("chai");
 
-class SSUStrategySelector {
+class SsuStrategySelector {
 
     async selectStrategy(testCaseAttributes){
         let strategy;
@@ -22,4 +22,4 @@ class SSUStrategySelector {
     }
 }
 
-module.exports = new SSUStrategySelector();
+module.exports = new SsuStrategySelector();

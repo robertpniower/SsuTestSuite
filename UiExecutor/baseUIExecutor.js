@@ -6,7 +6,6 @@ const { Key } = require('webdriverio')
 class BaseUIExecutor {
 
     /**
-   * @dineshwarandh
    * @description : Utility to select dropdown values either by visible text or data-value of the option
    * @param {*} element - Dropdown Element
    * @param {*} value - Visible text to be selected or the data-value attribute value
@@ -17,13 +16,9 @@ class BaseUIExecutor {
         let dropdownOption = (type === 'visibleText') ? await browser.$(`//*[contains(text(),'${value}')]`) : await browser.$(`//*[@data-value = '${value}']`);
 
         await Operations.toClick(dropdownOption);
-    //Needs to be modified so that it'll be global across entity as getSelectDropdownOption method contains v2plus specific locators
-    //let selectedValue = await this.getSelectDropdownOption(element);
-    //assert.equal(selectedValue, await dropdownOption.getText(), `Selected Dropdown value ${selectedValue} does not match with provided value ${value}`);
     }
 
     /**
-   * @darshankdh
    * @description : Utility to select dropdown values either by visible text or data-value of the option
    * @param {*} element - Dropdown Element
    * @param {*} value - Visible text to be selected or the data-value attribute value
@@ -41,13 +36,9 @@ class BaseUIExecutor {
         let dropdownOption = (type === 'visibleText') ? await browser.$(`//li[contains(text(),'${value}')]`) : await browser.$(`//li[@data-value = '${value}']`);
 
         await Operations.toClick(dropdownOption);
-    //Needs to be modified so that it'll be global across entity as getSelectDropdownOption method contains v2plus specific locators
-    //let selectedValue = await this.getSelectDropdownOption(element);
-    //assert.equal(selectedValue, await dropdownOption.getText(), `Selected Dropdown value ${selectedValue} does not match with provided value ${value}`);
     }
 
     /**
-   * @darshankdh
    * @description : Utility to select dropdown values either by visible text or data-value of the option
    * @param {*} element - Dropdown Element
    * @param {*} value - Visible text to be selected or the data-value attribute value
@@ -61,7 +52,6 @@ class BaseUIExecutor {
     }
 
     /**
-   * @dineshwarandh
    * @description : Utility to select values in multi select dropdown either by visible text or data-value of the option
    * @param {*} element - Dropdown Element
    * @param {*} value - values to be selected by visible text or data-value attribute
@@ -92,7 +82,6 @@ class BaseUIExecutor {
     }
 
     /**
-   * @robertpniowerDh
    * @description : Utility to select all values in multi select dropdown either by visible text or data-value of the option
    * @param {*} element - Dropdown Element
    * @param {*} valuesArray - valuesArray of Options to be selected by visible text or data-value attribute
@@ -116,7 +105,6 @@ class BaseUIExecutor {
     }
 
     /**
-     * @dineshwarandh
      * @description : Utility method to get options selected in a multi select dropdown
      * @param {*} dropdownElement - Root of Multi select Dropdown Element
      */
@@ -128,7 +116,6 @@ class BaseUIExecutor {
     }
 
     /**
-   * @dineshwarandh
    * @description : Utility to select random values in multi-select dropdown
    * @param {*} element - Dropdown Element
    * @param {*} type - identify option by visible text or data-value
@@ -148,7 +135,6 @@ class BaseUIExecutor {
     }
 
     /**
-   * @dineshwarandh
    * @description : Utility method to get selected option from a dropdown
    * @param {*} dropdownElement - Root of select Dropdown Element
    */
@@ -161,7 +147,6 @@ class BaseUIExecutor {
     }
 
     /**
-   * @dineshwarandh
    * @description : Utility method to return all the options in a dropdown element
    * @param {*} dropdownElement - Root of select Dropdown Element
    */
@@ -179,7 +164,6 @@ class BaseUIExecutor {
     }
 
     /**
-   * @dineshwarandh
    * @description : Utility method to select radio button option
    * @param {*} element - Root of Radio Button Element
    * @param {*} value - Value to be selected in radio button
@@ -197,7 +181,6 @@ class BaseUIExecutor {
     }
 
     /**
-    * @dineshwarandh
     * @description : Utility method to search and select a search result
     * @param {*} element - Root of Search Button Element
     * @param {*} value - Value to be Searched
@@ -216,8 +199,6 @@ class BaseUIExecutor {
             await browser.pause(500);
         }
 
-        // adding browser.pause() since the application is rendering different element before it renders the actual element,
-        // Discussing with dev team on how to handle it
         await browser.pause(2000);
         let searchResults = await browser.$$("[id*='option-']");
 
@@ -229,40 +210,6 @@ class BaseUIExecutor {
                 break;
             }
         }
-    }
-
-    /**
-  * @dineshwarandh
-  * @description : Utility method to search and select a date in Calendar
-  * @param {*} element - Root of Calendar Element
-  * @param {*} value - Date to be selected
-  * @param {*} separator - Character that separates date, month and year. Defaults to /
-  */
-    async selectDate(element, value, separator = "/") {
-        const date = value.split(separator)[0];
-        const month = value.split(separator)[1];
-        const year = value.split(separator)[2];
-
-        await element.click();
-        await Operations.waitforElementAndClick(await browser.$(`//*[@id='datepicker-popover'] //span[contains(text(),'edit')]`));
-        await browser.$(`//*[@id="datepicker-popover"]  //button[contains(text(),'${year}')]`).click();
-        let monthName = await browser.$("//*[@id='datepicker-popover']/div[3]/div/div[1]/span").getText();
-
-        monthName = monthName.split(" ")[0];
-
-        while(!monthName.includes("January")){
-            await browser.$("//*[@id='datepicker-popover'] //span[contains(text(),'navigate_before')]").click();
-            monthName = await browser.$("//*[@id='datepicker-popover']/div[3]/div/div[1]/span").getText();
-            monthName = monthName.split(" ")[0];
-            await browser.pause(200);
-        }
-
-        for (let startMonth = 1; startMonth < Number(month); startMonth++) {
-            await browser.$("//*[@id='datepicker-popover'] //span[contains(text(),'navigate_next')]").click();
-            await browser.pause(200);
-        }
-
-        await Operations.waitforElementAndClick(browser.$(`//*[@id="datepicker-popover"] //div[contains(text(),'${Number(date)}')]`));
     }
 
     async clearAndSetValue(element, data){

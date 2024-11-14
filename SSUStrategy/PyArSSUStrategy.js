@@ -1,11 +1,11 @@
 const { assert } = require("chai");
-const CommonSSUStrategy = require('./CommonSsuStrategy')
+const CommonSsuStrategy = require('./CommonSSUStrategy')
 
-class PedidisyaARSSUStrategy extends CommonSSUStrategy {
+class PedidisYaARSSUStrategy extends CommonSsuStrategy {
     constructor(testCaseAttributes){
         super();
         this.testCaseAttributes = testCaseAttributes
     }
 }
 
-module.exports = PedidisyaARSSUStrategy
+module.exports = PedidisYaARSSUStrategy

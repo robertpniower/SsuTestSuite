@@ -1,4 +1,4 @@
-const SSUStrategySelector = require('../SSUStrategy/SsuStrategySelector');
+const SsuStrategySelector = require('../SSUStrategy/SsuStrategySelector');
 const CommonUtils = require('../Utilities/commonUtils');
 const SsuBaseStrategy = require('../SSUStrategy/SSUBaseStrategy');
 const landingPageFaqData = require("../Objects/faqValidationData/faqData.json");
@@ -16,7 +16,7 @@ class BaseTest {
             this.addressPageElements =  await CommonUtils.getElementsFromCSV(`./Objects/locators/${testCaseAttributes.region}/AddressDetailsPage.csv`, testCaseAttributes.country, true, true);
             this.addressPageTestData =  await CommonUtils.loadTestDataFromCSV(`./Objects/testData/${testCaseAttributes.region}/AddressDetailsPage_data.csv`, testCaseAttributes.testCaseName);
             this.country = testCaseAttributes.country;
-            this.ssuStrategy = new SsuBaseStrategy(await SSUStrategySelector.selectStrategy(testCaseAttributes));
+            this.ssuStrategy = new SsuBaseStrategy(await SsuStrategySelector.selectStrategy(testCaseAttributes));
 
             return this;
         })();
@@ -52,7 +52,7 @@ class BaseTest {
         await CommonUtils.fillVerticalSegmentField(verticalValues, this.businessPageElements);
     }
 
-    async shopNonPrioritizedVerticalSegmentDropTest(verticalSegment){
+    async shopVerticalSegmentDropTest(verticalSegment){
         await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
 
         this.businessPageTestData.vertical_segment.data = verticalSegment.verticalSegmentTranslated[this.testCaseAttributes.language]

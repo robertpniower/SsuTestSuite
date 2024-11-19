@@ -48,4 +48,12 @@ describe("SSU - PedidosYa - AR Tests", function () {
             })
         }
     })
+
+    it.only("AR Restaurant VerticalSegment Test", async function () {
+        let testCaseAttributes = {country: "AR", testCaseName: "AR Restaurant VerticalSegment Test", language: "es", entity: "PY_AR", region: "LATAM"};
+        let verticalSegments = require('../../Objects/categories/LATAM/PY_AR.json');
+        let baseTest = await new BaseTest(testCaseAttributes);
+
+        await baseTest.validateRestaurantVerticalSegmentTest(verticalSegments)
+    })
 })

@@ -2,7 +2,7 @@ const SsuStrategySelector = require('../SSUStrategy/SsuStrategySelector');
 const CommonUtils = require('../Utilities/commonUtils');
 const SsuBaseStrategy = require('../SSUStrategy/SSUBaseStrategy');
 const landingPageFaqData = require("../Objects/faqValidationData/faqData.json");
-const UiExecutor = require('../UiExecutor/UiExecutor');
+const UiExecutor = require('../UIExecutor/UIExecutor');
 const errorMessages = require('../Objects/errorMessages/errorMessages.json')
 
 class BaseTest {
@@ -62,6 +62,15 @@ class BaseTest {
         await this.ssuStrategy.submitAddressDetailsPage(this.addressPageElements, this.addressPageTestData)
         await CommonUtils.validateVerticalSegmentDropPage(this.businessPageTestData.vertical_segment.data, this.country, this.testCaseAttributes)
 
+    }
+
+    async validateRestaurantVerticalSegmentTest(verticalSegments) {
+        await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
+        await CommonUtils.cookieBannerAction("deny")
+        await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData);
+        await CommonUtils.transitionToBusinessDetailsPage(this.landingPageElements);
+
+        await this.ssuStrategy.validateRestaurantVerticalSegment(this.testCaseAttributes.language, verticalSegments, this.businessPageElements)
     }
 
 }

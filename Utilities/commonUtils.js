@@ -5,7 +5,7 @@ const fs = require('fs');
 const countryConfig = require('../Objects/countryConfig.json');
 const Operations = require('../Operations/Operations');
 const Utility = require('./utility');
-const UiExecutor = require("../UiExecutor/UiExecutor")
+const UiExecutor = require("../UIExecutor/UIExecutor")
 
 class CommonUtils {
 
@@ -304,7 +304,7 @@ class CommonUtils {
         await Operations.waitForPageLoad();
 
         let currentURL = await browser.getUrl();
-        let bussinessURL = currentURL.replace('?lng=en', '/account-details/business-details');
+        let bussinessURL = currentURL.replace('?lng=es', '/account-details/business-details');
 
         await browser.url(bussinessURL);
         await Operations.waitForPageLoad();

@@ -1,0 +1,872 @@
+[
+    {
+        "verticalSegment": "Regular Restaurant",
+        "verticalSegmentTranslated": "Restaurant",
+        "categories": [
+            {
+                "category": "American",
+                "categoryTranslated": {
+                    "en": "American"
+                }
+            },
+            {
+                "category": "Arabic",
+                "categoryTranslated": {
+                    "en": "Arabic"
+                }
+            },
+            {
+                "category": "Asian",
+                "categoryTranslated": {
+                    "en": "Asian"
+                }
+            },
+            {
+                "category": "Armenian",
+                "categoryTranslated": {
+                    "en": "Armenian"
+                }
+            },
+            {
+                "category": "Beverages",
+                "categoryTranslated": {
+                    "en": "Beverages"
+                }
+            },
+            {
+                "category": "Breakfast",
+                "categoryTranslated": {
+                    "en": "Breakfast"
+                }
+            },
+            {
+                "category": "Burgers",
+                "categoryTranslated": {
+                    "en": "Burgers"
+                }
+            },
+            {
+                "category": "Cafe",
+                "categoryTranslated": {
+                    "en": "Cafe"
+                }
+            },
+            {
+                "category": "Cakes & Bakery",
+                "categoryTranslated": {
+                    "en": "Cakes & Bakery"
+                }
+            },
+            {
+                "category": "Chinese",
+                "categoryTranslated": {
+                    "en": "Chinese"
+                }
+            },
+            {
+                "category": "Chocolate",
+                "categoryTranslated": {
+                    "en": "Chocolate"
+                }
+            },
+            {
+                "category": "Coffee",
+                "categoryTranslated": {
+                    "en": "Coffee"
+                }
+            },
+            {
+                "category": "Combo",
+                "categoryTranslated": {
+                    "en": "Combo"
+                }
+            },
+            {
+                "category": "Desserts",
+                "categoryTranslated": {
+                    "en": "Desserts"
+                }
+            },
+            {
+                "category": "Egyptian",
+                "categoryTranslated": {
+                    "en": "Egyptian"
+                }
+            },
+            {
+                "category": "Emirati",
+                "categoryTranslated": {
+                    "en": "Emirati"
+                }
+            },
+            {
+                "category": "Fast Food",
+                "categoryTranslated": {
+                    "en": "Fast Food"
+                }
+            },
+            {
+                "category": "Fried Chicken",
+                "categoryTranslated": {
+                    "en": "Fried Chicken"
+                }
+            },
+            {
+                "category": "Frozen Yoghurt",
+                "categoryTranslated": {
+                    "en": "Frozen Yoghurt"
+                }
+            },
+            {
+                "category": "Grill",
+                "categoryTranslated": {
+                    "en": "Grill"
+                }
+            },
+            {
+                "category": "Healthy Food",
+                "categoryTranslated": {
+                    "en": "Healthy Food"
+                }
+            },
+            {
+                "category": "Hot Dogs",
+                "categoryTranslated": {
+                    "en": "Hot Dogs"
+                }
+            },
+            {
+                "category": "Ice Cream",
+                "categoryTranslated": {
+                    "en": "Ice cream"
+                }
+            },
+            {
+                "category": "Indian",
+                "categoryTranslated": {
+                    "en": "Indian"
+                }
+            },
+            {
+                "category": "International",
+                "categoryTranslated": {
+                    "en": "International"
+                }
+            },
+            {
+                "category": "Iranian",
+                "categoryTranslated": {
+                    "en": "Iranian"
+                }
+            },
+            {
+                "category": "Iraqi",
+                "categoryTranslated": {
+                    "en": "Iraqi"
+                }
+            },
+            {
+                "category": "Italian",
+                "categoryTranslated": {
+                    "en": "Italian"
+                }
+            },
+            {
+                "category": "Juices",
+                "categoryTranslated": {
+                    "en": "Juices"
+                }
+            },
+            {
+                "category": "Kurdish",
+                "categoryTranslated": {
+                    "en": "Kurdish"
+                }
+            },
+            {
+                "category": "Kuwaiti",
+                "categoryTranslated": {
+                    "en": "Kuwaiti"
+                }
+            },
+            {
+                "category": "Lebanese",
+                "categoryTranslated": {
+                    "en": "Lebanese"
+                }
+            },
+            {
+                "category": "Mandi",
+                "categoryTranslated": {
+                    "en": "Mandi"
+                }
+            },
+            {
+                "category": "Pakistani",
+                "categoryTranslated": {
+                    "en": "Pakistani"
+                }
+            },
+            {
+                "category": "Pasta",
+                "categoryTranslated": {
+                    "en": "Pasta"
+                }
+            },
+            {
+                "category": "Pizza",
+                "categoryTranslated": {
+                    "en": "Pizza"
+                }
+            },
+            {
+                "category": "Raw Tea & Coffee",
+                "categoryTranslated": {
+                    "en": "Raw Tea & Coffee"
+                }
+            },
+            {
+                "category": "Roastery",
+                "categoryTranslated": {
+                    "en": "Roastery"
+                }
+            },
+            {
+                "category": "Salads",
+                "categoryTranslated": {
+                    "en": "Salads"
+                }
+            },
+            {
+                "category": "Sandwiches",
+                "categoryTranslated": {
+                    "en": "Sandwiches"
+                }
+            },
+            {
+                "category": "Seafood",
+                "categoryTranslated": {
+                    "en": "Seafood"
+                }
+            },
+            {
+                "category": "Shawarma & Doner",
+                "categoryTranslated": {
+                    "en": "Shawarma & Doner"
+                }
+            },
+            {
+                "category": "Sliders",
+                "categoryTranslated": {
+                    "en": "Sliders"
+                }
+            },
+            {
+                "category": "Smoothie",
+                "categoryTranslated": {
+                    "en": "Smoothie"
+                }
+            },
+            {
+                "category": "Steak",
+                "categoryTranslated": {
+                    "en": "Steak"
+                }
+            },
+            {
+                "category": "Thai",
+                "categoryTranslated": {
+                    "en": "Thai"
+                }
+            },
+            {
+                "category": "Turkish",
+                "categoryTranslated": {
+                    "en": "Turkish"
+                }
+            },
+            {
+                "category": "Wings",
+                "categoryTranslated": {
+                    "en": "Wings"
+                }
+            }
+        ]
+    },
+    {
+        "verticalSegment": "Street Food",
+        "verticalSegmentTranslated": "Street Food",
+        "categories": [
+            {
+                "category": "American",
+                "categoryTranslated": {
+                    "en": "American"
+                }
+            },
+            {
+                "category": "Arabic",
+                "categoryTranslated": {
+                    "en": "Arabic"
+                }
+            },
+            {
+                "category": "Asian",
+                "categoryTranslated": {
+                    "en": "Asian"
+                }
+            },
+            {
+                "category": "Armenian",
+                "categoryTranslated": {
+                    "en": "Armenian"
+                }
+            },
+            {
+                "category": "Beverages",
+                "categoryTranslated": {
+                    "en": "Beverages"
+                }
+            },
+            {
+                "category": "Breakfast",
+                "categoryTranslated": {
+                    "en": "Breakfast"
+                }
+            },
+            {
+                "category": "Burgers",
+                "categoryTranslated": {
+                    "en": "Burgers"
+                }
+            },
+            {
+                "category": "Cafe",
+                "categoryTranslated": {
+                    "en": "Cafe"
+                }
+            },
+            {
+                "category": "Cakes & Bakery",
+                "categoryTranslated": {
+                    "en": "Cakes & Bakery"
+                }
+            },
+            {
+                "category": "Chinese",
+                "categoryTranslated": {
+                    "en": "Chinese"
+                }
+            },
+            {
+                "category": "Chocolate",
+                "categoryTranslated": {
+                    "en": "Chocolate"
+                }
+            },
+            {
+                "category": "Coffee",
+                "categoryTranslated": {
+                    "en": "Coffee"
+                }
+            },
+            {
+                "category": "Combo",
+                "categoryTranslated": {
+                    "en": "Combo"
+                }
+            },
+            {
+                "category": "Desserts",
+                "categoryTranslated": {
+                    "en": "Desserts"
+                }
+            },
+            {
+                "category": "Egyptian",
+                "categoryTranslated": {
+                    "en": "Egyptian"
+                }
+            },
+            {
+                "category": "Emirati",
+                "categoryTranslated": {
+                    "en": "Emirati"
+                }
+            },
+            {
+                "category": "Fast Food",
+                "categoryTranslated": {
+                    "en": "Fast Food"
+                }
+            },
+            {
+                "category": "Fried Chicken",
+                "categoryTranslated": {
+                    "en": "Fried Chicken"
+                }
+            },
+            {
+                "category": "Frozen Yoghurt",
+                "categoryTranslated": {
+                    "en": "Frozen Yoghurt"
+                }
+            },
+            {
+                "category": "Grill",
+                "categoryTranslated": {
+                    "en": "Grill"
+                }
+            },
+            {
+                "category": "Healthy Food",
+                "categoryTranslated": {
+                    "en": "Healthy Food"
+                }
+            },
+            {
+                "category": "Hot Dogs",
+                "categoryTranslated": {
+                    "en": "Hot Dogs"
+                }
+            },
+            {
+                "category": "Ice Cream",
+                "categoryTranslated": {
+                    "en": "Ice cream"
+                }
+            },
+            {
+                "category": "Indian",
+                "categoryTranslated": {
+                    "en": "Indian"
+                }
+            },
+            {
+                "category": "International",
+                "categoryTranslated": {
+                    "en": "International"
+                }
+            },
+            {
+                "category": "Iranian",
+                "categoryTranslated": {
+                    "en": "Iranian"
+                }
+            },
+            {
+                "category": "Iraqi",
+                "categoryTranslated": {
+                    "en": "Iraqi"
+                }
+            },
+            {
+                "category": "Italian",
+                "categoryTranslated": {
+                    "en": "Italian"
+                }
+            },
+            {
+                "category": "Juices",
+                "categoryTranslated": {
+                    "en": "Juices"
+                }
+            },
+            {
+                "category": "Kurdish",
+                "categoryTranslated": {
+                    "en": "Kurdish"
+                }
+            },
+            {
+                "category": "Kuwaiti",
+                "categoryTranslated": {
+                    "en": "Kuwaiti"
+                }
+            },
+            {
+                "category": "Lebanese",
+                "categoryTranslated": {
+                    "en": "Lebanese"
+                }
+            },
+            {
+                "category": "Mandi",
+                "categoryTranslated": {
+                    "en": "Mandi"
+                }
+            },
+            {
+                "category": "Pakistani",
+                "categoryTranslated": {
+                    "en": "Pakistani"
+                }
+            },
+            {
+                "category": "Pasta",
+                "categoryTranslated": {
+                    "en": "Pasta"
+                }
+            },
+            {
+                "category": "Pizza",
+                "categoryTranslated": {
+                    "en": "Pizza"
+                }
+            },
+            {
+                "category": "Roastery",
+                "categoryTranslated": {
+                    "en": "Roastery"
+                }
+            },
+            {
+                "category": "Salads",
+                "categoryTranslated": {
+                    "en": "Salads"
+                }
+            },
+            {
+                "category": "Sandwiches",
+                "categoryTranslated": {
+                    "en": "Sandwiches"
+                }
+            },
+            {
+                "category": "Seafood",
+                "categoryTranslated": {
+                    "en": "Seafood"
+                }
+            },
+            {
+                "category": "Shawarma & Doner",
+                "categoryTranslated": {
+                    "en": "Shawarma & Doner"
+                }
+            },
+            {
+                "category": "Sliders",
+                "categoryTranslated": {
+                    "en": "Sliders"
+                }
+            },
+            {
+                "category": "Smoothie",
+                "categoryTranslated": {
+                    "en": "Smoothie"
+                }
+            },
+            {
+                "category": "Steak",
+                "categoryTranslated": {
+                    "en": "Steak"
+                }
+            },
+            {
+                "category": "Thai",
+                "categoryTranslated": {
+                    "en": "Thai"
+                }
+            },
+            {
+                "category": "Turkish",
+                "categoryTranslated": {
+                    "en": "Turkish"
+                }
+            },
+            {
+                "category": "Wings",
+                "categoryTranslated": {
+                    "en": "Wings"
+                }
+            }
+        ]
+    },
+    {
+        "verticalSegment": "Coffee",
+        "verticalSegmentTranslated": "Coffee",
+        "categories": [
+            {
+                "category": "Coffee",
+                "categoryTranslated": {
+                    "en": "Coffee"
+                }
+            }
+        ]
+    },
+    {
+        "verticalSegment": "Home Based Kitchen",
+        "verticalSegmentTranslated": "Home Based Kitchen",
+        "categories": [
+            {
+                "category": "American",
+                "categoryTranslated": {
+                    "en": "American"
+                }
+            },
+            {
+                "category": "Arabic",
+                "categoryTranslated": {
+                    "en": "Arabic"
+                }
+            },
+            {
+                "category": "Asian",
+                "categoryTranslated": {
+                    "en": "Asian"
+                }
+            },
+            {
+                "category": "Armenian",
+                "categoryTranslated": {
+                    "en": "Armenian"
+                }
+            },
+            {
+                "category": "Beverages",
+                "categoryTranslated": {
+                    "en": "Beverages"
+                }
+            },
+            {
+                "category": "Breakfast",
+                "categoryTranslated": {
+                    "en": "Breakfast"
+                }
+            },
+            {
+                "category": "Burgers",
+                "categoryTranslated": {
+                    "en": "Burgers"
+                }
+            },
+            {
+                "category": "Cafe",
+                "categoryTranslated": {
+                    "en": "Cafe"
+                }
+            },
+            {
+                "category": "Cakes & Bakery",
+                "categoryTranslated": {
+                    "en": "Cakes & Bakery"
+                }
+            },
+            {
+                "category": "Chinese",
+                "categoryTranslated": {
+                    "en": "Chinese"
+                }
+            },
+            {
+                "category": "Chocolate",
+                "categoryTranslated": {
+                    "en": "Chocolate"
+                }
+            },
+            {
+                "category": "Coffee",
+                "categoryTranslated": {
+                    "en": "Coffee"
+                }
+            },
+            {
+                "category": "Combo",
+                "categoryTranslated": {
+                    "en": "Combo"
+                }
+            },
+            {
+                "category": "Desserts",
+                "categoryTranslated": {
+                    "en": "Desserts"
+                }
+            },
+            {
+                "category": "Egyptian",
+                "categoryTranslated": {
+                    "en": "Egyptian"
+                }
+            },
+            {
+                "category": "Emirati",
+                "categoryTranslated": {
+                    "en": "Emirati"
+                }
+            },
+            {
+                "category": "Fast Food",
+                "categoryTranslated": {
+                    "en": "Fast Food"
+                }
+            },
+            {
+                "category": "Fried Chicken",
+                "categoryTranslated": {
+                    "en": "Fried Chicken"
+                }
+            },
+            {
+                "category": "Frozen Yoghurt",
+                "categoryTranslated": {
+                    "en": "Frozen Yoghurt"
+                }
+            },
+            {
+                "category": "Grill",
+                "categoryTranslated": {
+                    "en": "Grill"
+                }
+            },
+            {
+                "category": "Healthy Food",
+                "categoryTranslated": {
+                    "en": "Healthy Food"
+                }
+            },
+            {
+                "category": "Hot Dogs",
+                "categoryTranslated": {
+                    "en": "Hot Dogs"
+                }
+            },
+            {
+                "category": "Ice Cream",
+                "categoryTranslated": {
+                    "en": "Ice cream"
+                }
+            },
+            {
+                "category": "Indian",
+                "categoryTranslated": {
+                    "en": "Indian"
+                }
+            },
+            {
+                "category": "International",
+                "categoryTranslated": {
+                    "en": "International"
+                }
+            },
+            {
+                "category": "Iranian",
+                "categoryTranslated": {
+                    "en": "Iranian"
+                }
+            },
+            {
+                "category": "Iraqi",
+                "categoryTranslated": {
+                    "en": "Iraqi"
+                }
+            },
+            {
+                "category": "Italian",
+                "categoryTranslated": {
+                    "en": "Italian"
+                }
+            },
+            {
+                "category": "Juices",
+                "categoryTranslated": {
+                    "en": "Juices"
+                }
+            },
+            {
+                "category": "Kuwaiti",
+                "categoryTranslated": {
+                    "en": "Kuwaiti"
+                }
+            },
+            {
+                "category": "Lebanese",
+                "categoryTranslated": {
+                    "en": "Lebanese"
+                }
+            },
+            {
+                "category": "Mandi",
+                "categoryTranslated": {
+                    "en": "Mandi"
+                }
+            },
+            {
+                "category": "Pakistani",
+                "categoryTranslated": {
+                    "en": "Pakistani"
+                }
+            },
+            {
+                "category": "Pasta",
+                "categoryTranslated": {
+                    "en": "Pasta"
+                }
+            },
+            {
+                "category": "Pizza",
+                "categoryTranslated": {
+                    "en": "Pizza"
+                }
+            },
+            {
+                "category": "Roastery",
+                "categoryTranslated": {
+                    "en": "Roastery"
+                }
+            },
+            {
+                "category": "Sandwiches",
+                "categoryTranslated": {
+                    "en": "Sandwiches"
+                }
+            },
+            {
+                "category": "Seafood",
+                "categoryTranslated": {
+                    "en": "Seafood"
+                }
+            },
+            {
+                "category": "Shawarma & Doner",
+                "categoryTranslated": {
+                    "en": "Shawarma & Doner"
+                }
+            },
+            {
+                "category": "Sliders",
+                "categoryTranslated": {
+                    "en": "Sliders"
+                }
+            },
+            {
+                "category": "Smoothie",
+                "categoryTranslated": {
+                    "en": "Smoothie"
+                }
+            },
+            {
+                "category": "Steak",
+                "categoryTranslated": {
+                    "en": "Steak"
+                }
+            },
+            {
+                "category": "Thai",
+                "categoryTranslated": {
+                    "en": "Thai"
+                }
+            },
+            {
+                "category": "Turkish",
+                "categoryTranslated": {
+                    "en": "Turkish"
+                }
+            },
+            {
+                "category": "Wings",
+                "categoryTranslated": {
+                    "en": "Wings"
+                }
+            }
+        ]
+    }
+]

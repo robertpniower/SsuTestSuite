@@ -1,5 +1,5 @@
 const { assert } = require("chai");
-const UIExecutor = require("../UiExecutor/UiExecutor.js")
+const UIExecutor = require("../UIExecutor/UIExecutor.js")
 const Operations = require("../Operations/Operations.js");
 const Utilities = require("../Utilities/utility.js");
 const SSUCommonUtils = require("../Utilities/commonUtils.js");
@@ -181,24 +181,6 @@ class CommonSsuValidator {
         return verticalValuesSorted;
 
     }
-
-    async validateCategory(language, dropVerticalSegments, categoryValues) {
-        allureReporter.addStep("INSIDE Validate Category Test");
-        await Operations.waitForPageLoad();
-        let translatedValues = dropVerticalSegments.map(obj => obj.categories.categoryTranslated[language]);
-        let translatedValuesSorted = translatedValues.sort();
-        let verticalValuesSorted = categoryValues.sort();
-
-        console.log(`categoryValues: ${verticalValuesSorted}`);
-        console.log(`categorySegments: ${translatedValuesSorted}`);
-
-        allureReporter.addStep(`Asserting that categoryValues are equal to categorySegments`);
-        expect(translatedValuesSorted).to.deep.equal(verticalValuesSorted);
-
-        return verticalValuesSorted;
-
-    }
-
 }
 
 module.exports = CommonSsuValidator;

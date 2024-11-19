@@ -1,17 +1,17 @@
-field Name,local Name,locator,locator Type,mandatory,element Type,countries
-first_name,Nombre,"""//*[@id=':Rk6lqlal2kq6:']""",custom,TRUE,textField,*AR*
-last_name,Apellido,"""//*[@id=':Rkalqlal2kq6:']""",custom,TRUE,textField,*AR*
-vertical,Tipo de negocio,"""//*[@id='vertical-label']/../div""",custom,TRUE,dropdown,*AR*
-telephone,Teléfono,"""//*[@id=':Rkilqlal2kq6:']""",custom,TRUE,textField,*AR*
-email,Email,"""//*[@id=':Rkmlqlal2kq6:']""",custom,TRUE,textField,*AR*
-begin_button,Comenzar,"""//button[contains(text(),'Comenzar')]""",custom,TRUE,button,*AR*
-avatar_button,,user-avatar-btn,data-testid,TRUE,textField,*AR*
-seeprogress_button,,"//button[@type='submit']/preceding-sibling::button[1]",custom,TRUE,textField,*AR*
-faq_link,,"""//*[@id='__next']/header/div[2]/div/a[2]""",custom,TRUE,,*AR*
-faq_section,,"""//*[@id='faq']/div/div[2]/div""",custom,TRUE,,*AR*
-timeline_continue_button,,[type='submit'],custom,TRUE,button,*AR*
-timeline_page1_continue_button,,[type='submit'],custom,TRUE,button,*AR*
-first_name_error_message,,"""//*[@id=':Rk6lqlal2kq6:-helper-text']""",custom,TRUE,Text,*AR*
-last_name_error_message,,"""//*[@id=':Rkalqlal2kq6:-helper-text']""",custom,TRUE,Text,*AR*
-phone_error_message,,"""//*[@id=':Rkilqlal2kq6:-helper-text']""",custom,TRUE,Text,*AR*
-email_error_message,,"""//*[@id=':Rkmlqlal2kq6:-helper-text']""",custom,TRUE,Text,*AR*
+field Name,local Name,locator,locator Type,element Type,countries
+first_name,Nombre,"""//*[@id=':Rk6lqlal2kq6:']""",custom,textField,*AR*
+last_name,Apellido,"""//*[@id=':Rkalqlal2kq6:']""",custom,textField,*AR*
+vertical,Tipo de negocio,"""//*[@id='vertical-label']/../div""",custom,dropdown,*AR*
+telephone,Teléfono,"""//*[@id=':Rkilqlal2kq6:']""",custom,textField,*AR*
+email,Email,"""//*[@id=':Rkmlqlal2kq6:']""",custom,textField,*AR*
+begin_button,Comenzar,"""//button[contains(text(),'Comenzar')]""",custom,button,*AR*
+avatar_button,,user-avatar-btn,data-testid,textField,*AR*
+seeprogress_button,,"//button[@type='submit']/preceding-sibling::button[1]",custom,textField,*AR*
+faq_link,,"""//*[@id='__next']/header/div[2]/div/a[2]""",custom,,*AR*
+faq_section,,"""//*[@id='faq']/div/div[2]/div""",custom,,*AR*
+timeline_continue_button,,[type='submit'],custom,button,*AR*
+timeline_page1_continue_button,,[type='submit'],custom,button,*AR*
+first_name_error_message,,"""//*[@id=':Rk6lqlal2kq6:-helper-text']""",custom,Text,*AR*
+last_name_error_message,,"""//*[@id=':Rkalqlal2kq6:-helper-text']""",custom,Text,*AR*
+phone_error_message,,"""//*[@id=':Rkilqlal2kq6:-helper-text']""",custom,Text,*AR*
+email_error_message,,"""//*[@id=':Rkmlqlal2kq6:-helper-text']""",custom,Text,*AR*

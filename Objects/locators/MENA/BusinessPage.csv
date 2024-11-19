@@ -1,0 +1,11 @@
+field Name,locator,locator Type,element Type,countries
+business_name,business.name,name,textField,*AE*
+vertical_segment,test-business.verticalSegment,data-testid,dropdown,*AE*
+category,test-business.categories,data-testid,multiDropdown,*AE*
+branches,business.numberOfLocations,name,textField,*AE*
+business_telephone,business.landlinePhone,name,textField,*AE*
+vertical,test-business.vertical,data-testid,dropdown,*AE*
+business_role,test-business.contactRole,data-testid,dropdown,*AE*
+trade_license,field-hasAcra,data-testid,radioButton,*AE*
+continue_button,"""//button[contains(text(),'Continue')]""",custom,button,*AE*
+back_button,"""//button[contains(text(),'Back')]""",custom,button,*AE*

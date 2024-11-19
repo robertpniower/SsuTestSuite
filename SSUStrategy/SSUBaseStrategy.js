@@ -40,8 +40,8 @@ class SsuBaseStrategy {
         await this.strategy.validateCategoryValues(language, dropVerticalSegments, verticalSegments);
     }
 
-    async validateCategory(language, dropVerticalSegments, category) {
-        await this.strategy.validateCategory(language, dropVerticalSegments, category);
+    async validateRestaurantVerticalSegment(language, verticalSegments, elements, testData) {
+        await this.strategy.validateRestaurantVerticalSegment(language, verticalSegments, elements, testData);
     }
 }
 

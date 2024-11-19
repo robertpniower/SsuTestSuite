@@ -1,0 +1,12 @@
+field Name,local Name,locator,locator Type,element Type,countries
+faq_link,,"""//*[@id='__next']/header/div[2]/div/a[1]""",custom,,*AE*
+faq_section,,"""//*[@id='faq']/div/div[2]/div""",custom,,*AE*
+first_name,First Name,"""//*[@id=':R2gqnanan2kq6:']""",custom,textField,*AE*
+last_name,Last Name,"""//*[@id=':R2hananan2kq6:']""",custom,textField,*AE*
+vertical,Business Type,"""//*[@id='vertical-label']/../div""",custom,dropdown,*AE*
+telephone,Mobile,"""//*[@id=':R2iananan2kq6:']""",custom,textField,*AE*
+email,Email,"""//*[@id=':R2iqnanan2kq6:']""",custom,textField,*AE*
+begin_button,Submit,"""//*[@id=':Rjqnanan2kq6:']""",custom,button,*AE*
+faq_section,,"""//*[@id='faq']/div/div[2]/div""",custom,,*AE
+timeline_continue_button,,[type='submit'],custom,button,*AE*
+timeline_page1_continue_button,,[type='submit'],custom,button,*AE*

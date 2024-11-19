@@ -1,0 +1,8 @@
+field Name,locator,locator Type,element Type,countries
+address,.MuiAutocomplete-input,custom,lookup,*AE*
+place_name,address.restaurant.placeName,name,lookup,*AE*
+street,address.restaurant.street,name,textField,*AE*
+street_number,address.restaurant.streetNumber,name,textField,*AE*
+zipcode,address.restaurant.zipcode,name,textField,*AE*
+city,address.restaurant.city,name,textField,*AE*
+area,address.restaurant.area,name,textField,*AE*

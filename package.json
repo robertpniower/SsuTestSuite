@@ -9,11 +9,9 @@
     "report.ci": "allure generate --clean -o allure-report",
     "eslint": "eslint . --max-warnings=0",
     "eslint-fix": "eslint . --fix",
-   
     "ssu-v3-test": "./node_modules/.bin/wdio ./conf/LATAM/ssu.v3.conf.js",
-    "ssu-v3-tb-test": "./node_modules/.bin/wdio .conf/MENA/ssu.tb.v3.conf.js"
-    
-   
+    "ssu-v3-tb-test": "./node_modules/.bin/wdio ./conf/MENA/ssu.tb.v3.conf.js",
+    "wdio": "wdio run ./wdio.conf.js"
   },
   "author": "Salesforce Automation Team",
   "license": "ISC",
@@ -65,7 +63,6 @@
     "winston": "^3.3.3",
     "xlsx": "^0.18.5"
   },
- 
   "lint-staged": {
     "*.js": [
       "npm run eslint"

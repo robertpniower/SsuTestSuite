@@ -1,0 +1,271 @@
+[
+    {
+        "verticalSegment": "Restaurante y café",
+        "verticalSegmentTranslated": "Restaurant",
+        "categories": [
+            {
+                "category": "Alcohol",
+                "categoryTranslated": {
+                    "es": "Alcohol"
+                }
+            },
+            {
+                "category": "Barra de Ensaladao",
+                "categoryTranslated": {
+                    "es": "Barra de Ensalada"
+                }
+            },
+            {
+                "category": "Batidos",
+                "categoryTranslated": {
+                    "es": "Batidos"
+                }
+            },
+            {
+                "category": "Bebidas",
+                "categoryTranslated": {
+                    "es": "Bebidas"
+                }
+            },
+            {
+                "category": "Café",
+                "categoryTranslated": {
+                    "es": "Café"
+                }
+            },
+            {
+                "category": "Calzones",
+                "categoryTranslated": {
+                    "es": "Calzones"
+                }
+            },
+            {
+                "category": "Carnes",
+                "categoryTranslated": {
+                    "es": "Carnes"
+                }
+            },
+            {
+                "category": "Ceviche",
+                "categoryTranslated": {
+                    "es": "Ceviche"
+                }
+            },
+            {
+                "category": "Comida Árabe",
+                "categoryTranslated": {
+                    "es": "Comida Árabe"
+                }
+            },
+            {
+                "category": "Comida Armenia",
+                "categoryTranslated": {
+                    "es": "Comida Armenia"
+                }
+            },
+            {
+                "category": "Comida Asiática",
+                "categoryTranslated": {
+                    "es": "Comida Asiática"
+                }
+            },
+            {
+                "category": "Comida China",
+                "categoryTranslated": {
+                    "es": "Comida China"
+                }
+            },{
+                "category": "Comida Egipcia",
+                "categoryTranslated": {
+                    "es": "Comida Egipcia"
+                }
+            },
+            {
+                "category": "Comida Española",
+                "categoryTranslated": {
+                    "es": "Comida Española"
+                }
+            },
+            {
+                "category": "Comida India",
+                "categoryTranslated": {
+                    "es": "Comida India"
+                }
+            },
+            {
+                "category": "Comida Italiana",
+                "categoryTranslated": {
+                    "es": "Comida Italiana"
+                }
+            },
+            {
+                "category": "Comida Japonesa",
+                "categoryTranslated": {
+                    "es": "Comida Japonesa"
+                }
+            },
+            {
+                "category": "Comida Mexicana",
+                "categoryTranslated": {
+                    "es": "Comida Mexicana"
+                }
+            },
+            {
+                "category": "Comida Peruana",
+                "categoryTranslated": {
+                    "es": "Comida Peruana"
+                }
+            },
+            {
+                "category": "Comida Rápida",
+                "categoryTranslated": {
+                    "es": "Comida Rápida"
+                }
+            },
+            {
+                "category": "Comida Vegana",
+                "categoryTranslated": {
+                    "es": "Comida Vegana"
+                }
+            },
+            {
+                "category": "Comida Vegetariana",
+                "categoryTranslated": {
+                    "es": "Comida Vegetariana"
+                }
+            },
+            {
+                "category": "Comida Venezolana",
+                "categoryTranslated": {
+                    "es": "Comida Venezolana"
+                }
+            },
+            {
+                "category": "Desayuno",
+                "categoryTranslated": {
+                    "es": "Desayuno"
+                }
+            },
+            {
+                "category": "Empanadas",
+                "categoryTranslated": {
+                    "es": "Empanadas"
+                }
+            },
+            {
+                "category": "Ensaladas",
+                "categoryTranslated": {
+                    "es": "Ensaladas"
+                }
+            },
+            {
+                "category": "Hamburguesas",
+                "categoryTranslated": {
+                    "es": "Hamburguesas"
+                }
+            },
+            {
+                "category": "Intertnacional",
+                "categoryTranslated": {
+                    "es": "Internacional"
+                }
+            },
+            {
+                "category": "Mariscos",
+                "categoryTranslated": {
+                    "es": "Mariscos"
+                }
+            },
+            {
+                "category": "Menú Fijo / Menú Especial",
+                "categoryTranslated": {
+                    "es": "Menú Fijo / Menú Especial"
+                }
+            },
+            {
+                "category": "Otras",
+                "categoryTranslated": {
+                    "es": "Otras"
+                }
+            },
+            {
+                "category": "Panadería",
+                "categoryTranslated": {
+                    "es": "Panadería"
+                }
+            },
+            {
+                "category": "Parrilla",
+                "categoryTranslated": {
+                    "es": "Parrilla"
+                }
+            },
+            {
+                "category": "Pasta",
+                "categoryTranslated": {
+                    "es": "Pasta"
+                }
+            },
+            {
+                "category": "Pizza",
+                "categoryTranslated": {
+                    "es": "Pizza"
+                }
+            },
+            {
+                "category": "Poke",
+                "categoryTranslated": {
+                    "es": "Poke"
+                }
+            },
+            {
+                "category": "Pollo",
+                "categoryTranslated": {
+                    "es": "Pollo"
+                }
+            },
+            {
+                "category": "Postres",
+                "categoryTranslated": {
+                    "es": "Postres"
+                }
+            },
+            {
+                "category": "Sándwiches",
+                "categoryTranslated": {
+                    "es": "Sándwiches"
+                }
+            },
+            {
+                "category": "Shakes",
+                "categoryTranslated": {
+                    "es": "Shakes"
+                }
+            },
+            {
+                "category": "Sopas",
+                "categoryTranslated": {
+                    "es": "Sopas"
+                }
+            },
+            {
+                "category": "Sushi",
+                "categoryTranslated": {
+                    "es": "Sushi"
+                }
+            },
+            {
+                "category": "Tortilla",
+                "categoryTranslated": {
+                    "es": "Tortilla"
+                }
+            },
+            {
+                "category": "Woks",
+                "categoryTranslated": {
+                    "es": "Woks"
+                }
+            }
+        ]
+    }
+]

@@ -175,6 +175,8 @@ class CommonSsuValidator {
         console.log(`verticalValues: ${verticalValuesSorted}`);
         console.log(`verticalSegments: ${translatedValuesSorted}`);
 
+        allureReporter.addStep(`verticalValues: ${verticalValuesSorted}`);
+        allureReporter.addStep(`verticalSegments: ${translatedValuesSorted}`);
         allureReporter.addStep(`Asserting that verticalValues are equal to verticalSegments`);
         expect(translatedValuesSorted).to.deep.equal(verticalValuesSorted);
 

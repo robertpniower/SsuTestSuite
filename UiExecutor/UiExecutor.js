@@ -7,7 +7,6 @@ const BaseUIExecutor = require("./baseUIExecutor.js");
 class UIExecutor extends BaseUIExecutor {
 
     /**
-     * @dineshwarandh
      * To perform UI Interaction on elements for given testData and action
      * @param {*} elements - Locator Object
      * @param {*} testData - testdata which are passed to the elements

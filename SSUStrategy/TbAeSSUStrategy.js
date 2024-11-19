@@ -46,6 +46,8 @@ class TalabatUAESsuStrategy extends CommonSsuStrategy {
             let categoryValues = (await UIExecutor.getAllDropdownOptions(businessCategoryElement)).sort();
 
             await browser.refresh();
+            allureReporter.addStep(`verticalValues: ${categoryValues}`);
+            allureReporter.addStep(`verticalSegments: ${categoryTranslated}`);
             allureReporter.addStep(`Asserting that categoryValues: ${categoryValues} are equal to categorySegments: ${categoryTranslated}`);
             expect(categoryTranslated).to.deep.equal(categoryValues);
 
@@ -53,7 +55,7 @@ class TalabatUAESsuStrategy extends CommonSsuStrategy {
 
         return businessVerticalSegments
 
-    }
+    };
 
     async fillRestaurantVerticalSegments(businessPageElements, businessPageTestData, businessVerticalSegments) {
         allureReporter.addStep('INSIDE FillRestaurantVerticalSegments.');
@@ -107,7 +109,7 @@ class TalabatUAESsuStrategy extends CommonSsuStrategy {
             }
 
         }
-    }
+    };
 }
 
 module.exports = TalabatUAESsuStrategy;

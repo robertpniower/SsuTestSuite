@@ -1,0 +1,34 @@
+[
+    {
+      "verticalSegment": "Regular Restaurant",
+      "verticalSegmentTranslated": {
+        "en": "Restaurant"
+      },
+      "drop": false,
+      "hasCategory": true
+    },
+    {
+      "verticalSegment": "Electronics",
+      "verticalSegmentTranslated": {
+        "en": "Electronics"
+      },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "Pharmacy",
+      "verticalSegmentTranslated": {
+        "en": "Pharmacy"
+      },
+      "drop": true,
+      "hasCategory": false
+    },
+    {
+      "verticalSegment": "Pets",
+      "verticalSegmentTranslated": {
+        "en": "Pets"
+      },
+      "drop": true,
+      "hasCategory": false
+    }
+  ]

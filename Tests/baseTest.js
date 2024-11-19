@@ -2,8 +2,9 @@ const SsuStrategySelector = require('../SSUStrategy/SsuStrategySelector');
 const CommonUtils = require('../Utilities/commonUtils');
 const SsuBaseStrategy = require('../SSUStrategy/SSUBaseStrategy');
 const landingPageFaqData = require("../Objects/faqValidationData/faqData.json");
-const UiExecutor = require('../UIExecutor/UIExecutor');
-const errorMessages = require('../Objects/errorMessages/errorMessages.json')
+const UIExecutor = require('../UIExecutor/UIExecutor');
+const errorMessages = require('../Objects/errorMessages/errorMessages.json');
+const TalabatUAESsuStrategy = require('../SSUStrategy/TbAeSsuStrategy');
 
 class BaseTest {
     constructor(testCaseAttributes) {
@@ -17,6 +18,7 @@ class BaseTest {
             this.addressPageTestData =  await CommonUtils.loadTestDataFromCSV(`./Objects/testData/${testCaseAttributes.region}/AddressDetailsPage_data.csv`, testCaseAttributes.testCaseName);
             this.country = testCaseAttributes.country;
             this.ssuStrategy = new SsuBaseStrategy(await SsuStrategySelector.selectStrategy(testCaseAttributes));
+            this.TalabatUAESsuStrategy = new TalabatUAESsuStrategy(testCaseAttributes);
 
             return this;
         })();
@@ -27,30 +29,52 @@ class BaseTest {
         await CommonUtils.cookieBannerAction("deny");
         await this.ssuStrategy.verifyFaqSectionText(this.landingPageElements, landingPageFaqData[this.testCaseAttributes.region][this.testCaseAttributes.country][this.testCaseAttributes.language], this.testCaseAttributes.country);
 
-    }
+    };
 
     async varifyErrorMessages() {
         await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV, this.testCaseAttributes.language);
-        await UiExecutor.performUIInteractions(this.landingPageElements, this.landingPageTestData);
+        await UIExecutor.performUIInteractions(this.landingPageElements, this.landingPageTestData);
         await this.ssuStrategy.verifyErrorMessages(this.landingPageElements, errorMessages, this.country, this.testCaseAttributes.checkDisplayed);
-    }
+    };
 
     async validateVerticalSegmentTest(verticalSegments) {
         await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
         await CommonUtils.cookieBannerAction("deny")
         await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData);
         let verticalSegment = await browser.$(this.businessPageElements['vertical_segment'].locator);
-        let verticalValues = await UiExecutor.getAllDropdownOptions(verticalSegment);
+        let verticalValues = await UIExecutor.getAllDropdownOptions(verticalSegment);
         let dropVerticalSegments = verticalSegments.filter(verticalSegment => verticalSegment.verticalSegment !== 'Regular Restaurant');
 
         await this.ssuStrategy.validateVerticalSegment(this.testCaseAttributes.language, dropVerticalSegments, verticalValues);
 
         await browser.refresh();
 
-        await UiExecutor.performUIInteractions(this.businessPageElements, this.businessPageTestData);
+        await UIExecutor.performUIInteractions(this.businessPageElements, this.businessPageTestData);
 
         await CommonUtils.fillVerticalSegmentField(verticalValues, this.businessPageElements);
-    }
+    };
+
+    async shopVerticalSegmentTest(verticalSegments) {
+        await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
+        await CommonUtils.cookieBannerAction("deny")
+        await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData);
+        let verticalSegment = await browser.$(this.businessPageElements['vertical_segment'].locator);
+
+        await verticalSegment.waitForExist();
+        await verticalSegment.waitForDisplayed();
+        let verticalValues = await UIExecutor.getAllDropdownOptions(verticalSegment);
+
+        await this.ssuStrategy.validateVerticalSegment(this.testCaseAttributes.language, verticalSegments, verticalValues);
+    };
+
+    async restaurantVerticalSegmentTest(verticalSegments) {
+        await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
+        await CommonUtils.cookieBannerAction("deny")
+        await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData);
+        await CommonUtils.transitionToBusinessDetailsPage(this.landingPageElements);
+        await this.ssuStrategy.validateRestaurantVerticalSegment(this.testCaseAttributes.language, verticalSegments, this.businessPageElements, this.businessPageTestData);
+
+    };
 
     async shopVerticalSegmentDropTest(verticalSegment){
         await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
@@ -62,7 +86,7 @@ class BaseTest {
         await this.ssuStrategy.submitAddressDetailsPage(this.addressPageElements, this.addressPageTestData)
         await CommonUtils.validateVerticalSegmentDropPage(this.businessPageTestData.vertical_segment.data, this.country, this.testCaseAttributes)
 
-    }
+    };
 
     async validateRestaurantVerticalSegmentTest(verticalSegments) {
         await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
@@ -70,8 +94,10 @@ class BaseTest {
         await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData);
         await CommonUtils.transitionToBusinessDetailsPage(this.landingPageElements);
 
-        await this.ssuStrategy.validateRestaurantVerticalSegment(this.testCaseAttributes.language, verticalSegments, this.businessPageElements)
-    }
+        const businessVerticalSegments = await this.ssuStrategy.validateRestaurantVerticalSegment(this.testCaseAttributes.language, verticalSegments, this.businessPageElements);
+
+        await this.TalabatUAESsuStrategy.fillRestaurantVerticalSegments(this.businessPageElements, this.businessPageTestData, businessVerticalSegments)
+    };
 
 }
 

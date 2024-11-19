@@ -60,7 +60,6 @@ class BaseUIExecutor {
    */
     async mutliSelectDropdownValue(element, value, type, checkSelectedValues = true) {
         await Operations.toClick(element);
-        // ToDo currently this method is only handling comma seperated Strings should also be implemented for Arrays
         let options = value.split(";");
 
         value = value.replaceAll(";", ", ");

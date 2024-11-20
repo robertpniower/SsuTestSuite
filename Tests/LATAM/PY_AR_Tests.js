@@ -11,15 +11,15 @@ describe("SSU - PedidosYa - AR Tests", function () {
         await baseTest.validateFAQText();
     });
 
-    it('AR - LandingPage error messages click', async function () {
-        let testCaseAttributes = {country: "AR", testCaseName: "AR - LandingPage error messages click", language: "es", entity: "PY_AR", region: "LATAM", checkDisplayed: true};
+    it('AR LandingPage error messages validation', async function () {
+        let testCaseAttributes = {country: "AR", testCaseName: "AR LandingPage error messages validation", language: "es", entity: "PY_AR", region: "LATAM", checkDisplayed: true};
         let baseTest = await new BaseTest(testCaseAttributes);
 
         await baseTest.varifyErrorMessages();
     })
 
-    it('AR - LandingPage error messages valid input', async function () {
-        let testCaseAttributes = {country: "AR", testCaseName: "AR - LandingPage error messages valid input", language: "es", entity: "PY_AR", region: "LATAM", checkDisplayed: false};
+    it('AR - LandingPage Form vslidstion', async function () {
+        let testCaseAttributes = {country: "AR", testCaseName: "AR LandingPage Form validation", language: "es", entity: "PY_AR", region: "LATAM", checkDisplayed: false};
         let baseTest = await new BaseTest(testCaseAttributes);
 
         await baseTest.varifyErrorMessages();

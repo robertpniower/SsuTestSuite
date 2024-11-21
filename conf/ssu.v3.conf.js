@@ -1,15 +1,7 @@
-const deepmerge = require('deepmerge');
 const fs = require('fs');
 const path = require('path');
 const baseConf = require('../wdio.base.conf');
 const CWD = process.env.CI ? process.env.WORKSPACE : process.env.PWD
-
-exports.config = deepmerge(baseConf.config, {
-    username: process.env.STAGEQAAUTO_USERNAME,
-    password: process.env.STAGEQAAUTO_KEY,
-    username_uat: process.env.STAGEQAAUTO_USERNAME_UAT,
-    password_uat: process.env.STAGEQAAUTO_KEY_UAT,
-});
 
 exports.config.specs = [
     `${CWD}/Tests/**/**/*.js`

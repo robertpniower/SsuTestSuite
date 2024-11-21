@@ -50,6 +50,11 @@ class UIExecutor extends BaseUIExecutor {
                             allureReporter.addStep(`Selected ${data} in ${keys[i]} dropdown element`);
                             break;
 
+                        case "selectlidropdownbytext":
+                            await this.selectListElementDropdownValue(element, data, "visibleText");
+                            allureReporter.addStep(`Selected ${data}  in ${keys[i]} dropdown element`);
+                            break;
+
                         case "multiselectdropdownbytext":
                             await this.mutliSelectDropdownValue(element, data, "visibleText");
                             allureReporter.addStep(`Selected ${data} in ${keys[i]} multi select dropdown element`);

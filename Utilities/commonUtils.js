@@ -295,16 +295,15 @@ class CommonUtils {
     }
 
     /**
-   * @robertpniowerdh
    * function to transition from LandinPage to BusinessDetailsPage
    * @param verticalValue -Array containing the values from VerticalSegment
    * @param businessPageElements -locators of businessDetailsPage
     */
-    async transitionToBusinessDetailsPage(landingPageElements) {
+    async transitionToBusinessDetailsPage(language, landingPageElements) {
         await Operations.waitForPageLoad();
 
         let currentURL = await browser.getUrl();
-        let bussinessURL = currentURL.replace('?lng=es', '/account-details/business-details');
+        let bussinessURL = currentURL.replace(`?lng=${language}`, '/account-details/business-details');
 
         await browser.url(bussinessURL);
         await Operations.waitForPageLoad();

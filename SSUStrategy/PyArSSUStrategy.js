@@ -24,8 +24,6 @@ class PedidisYaARSSUStrategy extends CommonSsuStrategy {
         let categoryTranslated = categories.map(category => category.categoryTranslated[language]).sort();
 
         await browser.refresh();
-        allureReporter.addStep(`verticalValues: ${categoryValues}`);
-        allureReporter.addStep(`verticalSegments: ${categoryTranslated}`);
         allureReporter.addStep(`Asserting that verticalValues: ${categoryValues} are equal to verticalSegments: ${categoryTranslated}`);
         expect(categoryTranslated).to.deep.equal(categoryValues);
 

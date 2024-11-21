@@ -1,7 +1,7 @@
 const deepmerge = require('deepmerge');
 const fs = require('fs');
 const path = require('path');
-const baseConf = require('../../wdio.base.conf');
+const baseConf = require('../wdio.base.conf');
 const CWD = process.env.CI ? process.env.WORKSPACE : process.env.PWD
 
 exports.config = deepmerge(baseConf.config, {
@@ -12,7 +12,7 @@ exports.config = deepmerge(baseConf.config, {
 });
 
 exports.config.specs = [
-    `${CWD}/Tests/LATAM/**/*.js`
+    `${CWD}/Tests/**/**/*.js`
 ]
 exports.config.capabilities[0].browserVersion = '130.0.6723.69';
 

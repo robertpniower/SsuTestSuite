@@ -16,14 +16,14 @@ describe("SSU - PedidosYa - AR Tests", function () {
         let baseTest = await new BaseTest(testCaseAttributes);
 
         await baseTest.varifyErrorMessages();
-    })
+    });
 
     it('AR - LandingPage Form vslidstion', async function () {
         let testCaseAttributes = {country: "AR", testCaseName: "AR LandingPage Form validation", language: "es", entity: "PY_AR", region: "LATAM", checkDisplayed: false};
         let baseTest = await new BaseTest(testCaseAttributes);
 
         await baseTest.varifyErrorMessages();
-    })
+    });
 
     it('AR Shop Validate VerticalSegment Test', async function () {
         let verticalSegments = require('../../Objects/verticalSegments/LATAM/PY_AR.json');
@@ -31,7 +31,7 @@ describe("SSU - PedidosYa - AR Tests", function () {
         let baseTest = await new BaseTest(testCaseAttributes);
 
         await baseTest.validateVerticalSegmentTest(verticalSegments);
-    })
+    });
 
     context('AR Shop Drop Test', async function () {
         let testCaseAttributes = {country: "AR", testCaseName: "AR Shop Drop Test", language: "es", entity: "PY_AR", region: "LATAM"};
@@ -47,13 +47,13 @@ describe("SSU - PedidosYa - AR Tests", function () {
                 await baseTest.shopVerticalSegmentDropTest(dropVerticalSegment);
             })
         }
-    })
+    });
 
     it("AR Restaurant VerticalSegment Test", async function () {
         let testCaseAttributes = {country: "AR", testCaseName: "AR Restaurant VerticalSegment Test", language: "es", entity: "PY_AR", region: "LATAM"};
         let verticalSegments = require('../../Objects/categories/LATAM/PY_AR.json');
         let baseTest = await new BaseTest(testCaseAttributes);
 
-        await baseTest.validateRestaurantVerticalSegmentTest(verticalSegments)
-    })
+        await baseTest.restaurantVerticalSegmentTest(verticalSegments)
+    });
 })

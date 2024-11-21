@@ -39,6 +39,10 @@ class SsuBaseStrategy {
     async validateRestaurantVerticalSegment(language, verticalSegments, elements, testData) {
         await this.strategy.validateRestaurantVerticalSegment(language, verticalSegments, elements, testData);
     }
+
+    async fillRestaurantVerticalSegments(elements, testData, verticalSegments) {
+        await this.strategy.fillRestaurantVerticalSegments(elements, testData, verticalSegments);
+    }
 }
 
 module.exports = SsuBaseStrategy;

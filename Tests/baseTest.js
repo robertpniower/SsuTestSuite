@@ -71,7 +71,7 @@ class BaseTest {
         await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
         await CommonUtils.cookieBannerAction("deny")
         await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData);
-        await CommonUtils.transitionToBusinessDetailsPage(this.landingPageElements);
+        await CommonUtils.transitionToBusinessDetailsPage(this.testCaseAttributes.language, this.landingPageElements);
         await this.ssuStrategy.validateRestaurantVerticalSegment(this.testCaseAttributes.language, verticalSegments, this.businessPageElements, this.businessPageTestData);
 
     };
@@ -92,11 +92,11 @@ class BaseTest {
         await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
         await CommonUtils.cookieBannerAction("deny")
         await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData);
-        await CommonUtils.transitionToBusinessDetailsPage(this.landingPageElements);
+        await CommonUtils.transitionToBusinessDetailsPage(this.testCaseAttributes.language, this.landingPageElements);
 
-        const businessVerticalSegments = await this.ssuStrategy.validateRestaurantVerticalSegment(this.testCaseAttributes.language, verticalSegments, this.businessPageElements);
+        await this.ssuStrategy.validateRestaurantVerticalSegment(this.testCaseAttributes.language, verticalSegments, this.businessPageElements, this.businessPageTestData);
 
-        await this.TalabatUAESsuStrategy.fillRestaurantVerticalSegments(this.businessPageElements, this.businessPageTestData, businessVerticalSegments)
+        await this.ssuStrategy.fillRestaurantVerticalSegments(this.businessPageElements, this.businessPageTestData, verticalSegments)
     };
 
 }

@@ -1,53 +1,56 @@
 const fs = require('fs');
 const path = require('path');
 const baseConf = require('../wdio.base.conf');
-const CWD = process.env.CI ? process.env.WORKSPACE : process.env.PWD
+const CWD = process.env.CI ? process.env.WORKSPACE : process.env.PWD;
 
-exports.config.specs = [
-    `${CWD}/Tests/**/**/*.js`
-]
-exports.config.capabilities[0].browserVersion = '130.0.6723.69';
+// Ensure exports.config is initialized with baseConf or an empty object
+exports.config = Object.assign({}, baseConf.config || {}, {
+    specs: [`${CWD}/Tests/**/**/*.js`],
+    maxInstances: 1,
+    capabilities: [
+        {
+            browserName: 'chrome',
+            browserVersion: '130.0.6723.69',
+            maxInstances: 1,
+            'goog:chromeOptions': {
+                args: process.env.HEADLESS === 'false'
+                    ? []
+                    : ['headless=new', 'window-size=1920,1080', 'disable-gpu', 'disable-dev-shm-usage', 'no-sandbox'],
+                // Uncomment this line if `chromeModheader` is defined
+                // extensions: [chromeModheader.getEncodedExtension()],
+            },
+        },
+    ],
+    logLevel: 'info',
+    mochaOpts: {
+        ui: 'bdd',
+        timeout: process.env.DEBUG === 'true' ? 7999999 : 2999999,
+        retries: 1,
+    },
+});
 
-exports.config.maxInstances = 1;
-exports.config.capabilities[0].maxInstances = 1;
-//exports.config.capabilities[0]['goog:chromeOptions']["extensions"]= [chromeModheader.getEncodedExtension()];
-exports.config.logLevel = 'info';
-exports.config.mochaOpts = {
-    ui: 'bdd',
-    timeout: process.env.DEBUG === 'true' ? 7999999 : 2999999,
-    retries: 1,
-},
-
-exports.config.capabilities[0]['goog:chromeOptions']["args"] = (process.env.HEADLESS === 'false') ? [] : ['headless=new', 'window-size=1920,1080', 'disable-gpu', 'disable-dev-shm-usage', 'no-sandbox']
-
+// onComplete Hook
 exports.config.onComplete = function (exitCode, config, capabilities, results) {
     console.log("***************** INSIDE ONCOMPLETE FUNCTION ***************");
 
     try {
-        // Initialize envProps as an object
         let envProps = {};
 
         capabilities.forEach((capability, index) => {
             const { browserName, browserVersion } = capability;
-
             envProps[`BROWSER${index + 1}`] = browserName;
             envProps[`BROWSER_VERSION${index + 1}`] = browserVersion;
         });
 
-        let folderName = './allure-results';
-        let fileName = 'environment.properties';
+        const folderName = './allure-results';
+        const fileName = 'environment.properties';
 
-        folderName = folderName.replace(/^(\.\.(\/|\\|$))+/, '');
-        fileName = fileName.replace(/^(\.\.(\/|\\|$))+/, '');
-
-        // Check if the folder exists
         if (fs.existsSync(folderName)) {
             const filePath = path.join(folderName, fileName);
             const properties = Object.entries(envProps)
                 .map(([key, value]) => `${key}=${value}`)
                 .join('\n');
 
-            // Write the properties to the file
             fs.writeFileSync(filePath, properties);
 
             console.log(`Environment properties file '${fileName}' created successfully.`);
@@ -57,12 +60,11 @@ exports.config.onComplete = function (exitCode, config, capabilities, results) {
 
         if (!process.env.CI) {
             console.log("Not in CI Environment, Generating Allure report ");
-            var exec = require('child_process').exec;
-            let child = exec('allure generate allure-results --clean && allure open', function (error, stdout, stderr) {
+            const exec = require('child_process').exec;
+            exec('allure generate allure-results --clean && allure open', (error, stdout, stderr) => {
                 console.log('stdout: ' + stdout);
                 console.log('stderr: ' + stderr);
-
-                if (error !== null) {
+                if (error) {
                     console.log('exec error: ' + error);
                 }
             });
@@ -71,4 +73,4 @@ exports.config.onComplete = function (exitCode, config, capabilities, results) {
         console.log("**** Error Occurred in OnComplete function ******");
         console.log(e.message);
     }
-}
+};

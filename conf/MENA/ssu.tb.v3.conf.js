@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const baseConf = require('../wdio.base.conf');
+const baseConf = require('../../wdio.base.conf');
 const CWD = process.env.CI ? process.env.WORKSPACE : process.env.PWD
 
 exports.config.specs = [

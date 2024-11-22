@@ -38,7 +38,7 @@ describe("SSU - Talabat - AE Tests", function () {
         for (const dropVerticalSegment of dropVerticalSegments) {
             let baseTest = await new BaseTest(testCaseAttributes);
 
-            it.only(`AE Shop Drop Test - ${dropVerticalSegment.verticalSegment}`, async function () {
+            it.skip(`AE Shop Drop Test - ${dropVerticalSegment.verticalSegment}`, async function () {
                 await baseTest.shopVerticalSegmentDropTest(dropVerticalSegment);
             })
         }

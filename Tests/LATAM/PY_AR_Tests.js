@@ -43,7 +43,7 @@ describe("SSU - PedidosYa - AR Tests", function () {
         for (const dropVerticalSegment of dropVerticalSegments) {
             let baseTest = await new BaseTest(testCaseAttributes);
 
-            it.only(`AR Shop Drop Test - ${dropVerticalSegment.verticalSegment}`, async function () {
+            it(`AR Shop Drop Test - ${dropVerticalSegment.verticalSegment}`, async function () {
                 await baseTest.shopVerticalSegmentDropTest(dropVerticalSegment);
             })
         }

@@ -26,23 +26,20 @@ pipeline {
             }
         }
 
-        stage('Generate Test Reports') {
-            steps {
-                script {
-                    def timestamp = new Date().format("yyyyMMddHHmmss")
-                    def reportPath = "target/allure-results-${timestamp}"
-                    echo "Setting Allure results path: ${reportPath}"
-                    sh "cp -R target/allure-results ${reportPath}"
-                    allure([
-                        includeProperties: false,
-                        jdk: '',
-                        properties: [],
-                        reportBuildPolicy: 'ALWAYS',
-                        results: [[path: reportPath]]
-                    ])
-                }
-            }
-        }
+        // stage('Generating Test Reports...') {
+        //     steps {
+        //     sh 'npm run report:history && npm run report.ci'
+        //     script {
+        //             allure([
+        //                     includeProperties: false,
+        //                     jdk: '',
+        //                     properties: [],
+        //                     reportBuildPolicy: 'ALWAYS',
+        //                     results: [[path: 'target/allure-results']]
+        //             ])
+        //     }   
+        //     }
+        // }
     }
     post {
         success {

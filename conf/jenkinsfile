@@ -2,60 +2,75 @@ pipeline {
     agent any
     tools {
         nodejs 'NodeJS 23'
-    }   
+    }
     stages {
-        
+        stage('Clean Workspace') {
+            steps {
+                echo 'Cleaning workspace...'
+                sh 'rm -rf node_modules/ package-lock.json target/allure-results/*'
+            }
+        }
+
         stage('Build') {
             steps {
-                echo 'Install Dependencies...'
-                sh 'rm -r -f node_modules/'
-                sh 'rm -f package-lock.json'
+                echo 'Installing dependencies...'
                 sh 'node --version'
-                sh 'npm install'                   
-                }
+                sh 'npm install'
             }
+        }
 
-        stage('Test') { 
+        stage('Test') {
             steps {
-                echo 'Starting Test Automation Suits...'
-                sh ('npm run ssu-v3-test')   
-                }                    
+                echo 'Starting Test Automation Suites...'
+                sh 'npm run ssu-v3-test'
             }
+        }
 
-        stage('Generating Test Reports...') {
+        stage('Generate Test Reports') {
             steps {
-            sh 'npm run report:history && npm run report.ci'
-            script {
+                script {
+                    def timestamp = new Date().format("yyyyMMddHHmmss")
+                    def reportPath = "target/allure-results-${timestamp}"
+                    echo "Setting Allure results path: ${reportPath}"
+                    sh "cp -R target/allure-results ${reportPath}"
                     allure([
-                            includeProperties: false,
-                            jdk: '',
-                            properties: [],
-                            reportBuildPolicy: 'ALWAYS',
-                            results: [[path: 'target/allure-results']]
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: reportPath]]
                     ])
-            }   
+                }
             }
         }
     }
-    post{
-        success{
-            echo 'The Automation finish successfully'
+    post {
+        success {
+            echo 'The automation finished successfully.'
         }
 
-        failure{
-            echo 'Something went wrong'
-    
+        failure {
+            echo 'Something went wrong.'
         }
-        always{
+
+        always {
+            echo 'Cleaning up old artifacts...'
+            sh 'rm -f /Users/r.pniower.ext/.jenkins/jobs/SSUTestSuite/builds/*/archive/allure-report.zip || true'
+            
+            echo 'Regenerating reports...'
             sh 'npm run report:history && npm run report.ci'
-           script {
-                    allure([
-                            includeProperties: false,
-                            jdk: '',
-                            properties: [],
-                            reportBuildPolicy: 'ALWAYS',
-                            results: [[path: 'target/allure-results']]
-                    ])
+            script {
+                def timestamp = new Date().format("yyyyMMddHHmmss")
+                def reportPath = "target/allure-results-${timestamp}"
+                echo "Setting Allure results path in always block: ${reportPath}"
+                sh "cp -R target/allure-results ${reportPath}"
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: reportPath]]
+                ])
             }
         }
     }

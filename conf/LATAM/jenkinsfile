@@ -53,25 +53,17 @@ pipeline {
             echo 'Something went wrong.'
         }
 
-        always {
-            echo 'Cleaning up old artifacts...'
-            sh 'rm -f /Users/r.pniower.ext/.jenkins/jobs/SSUTestSuite/builds/*/archive/allure-report.zip || true'
-            
-            echo 'Regenerating reports...'
-            sh 'npm run report:history && npm run report.ci'
+            always{
+                sh 'npm run report:history && npm run report.ci'
             script {
-                def timestamp = new Date().format("yyyyMMddHHmmss")
-                def reportPath = "target/allure-results-${timestamp}"
-                echo "Setting Allure results path in always block: ${reportPath}"
-                sh "cp -R target/allure-results ${reportPath}"
-                allure([
-                    includeProperties: false,
-                    jdk: '',
-                    properties: [],
-                    reportBuildPolicy: 'ALWAYS',
-                    results: [[path: reportPath]]
-                ])
-            }
+                        allure([
+                                includeProperties: false,
+                                jdk: '',
+                                properties: [],
+                                reportBuildPolicy: 'ALWAYS',
+                                results: [[path: 'target/allure-results']]
+                        ])
+                }
         }
     }
 }

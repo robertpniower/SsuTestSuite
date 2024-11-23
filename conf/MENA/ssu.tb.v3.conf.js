@@ -1,74 +1,77 @@
 const fs = require('fs');
 const path = require('path');
 const baseConf = require('../../wdio.base.conf');
-const CWD = process.env.CI ? process.env.WORKSPACE : process.env.PWD
+const CWD = process.env.CI ? process.env.WORKSPACE : process.env.PWD;
 
-exports.config.specs = [
-    `${CWD}/Tests/MENA/**/*.js`
-]
-exports.config.capabilities[0].browserVersion = '130.0.6723.69';
+// Initialize exports.config with baseConf
+exports.config = {
+    ...baseConf.config,
+    specs: [`${CWD}/Tests/MENA/**/*.js`],
+    maxInstances: 1,
+    capabilities: [
+        {
+            browserName: 'chrome',
+            browserVersion: '130.0.6723.69',
+            maxInstances: 1,
+            'goog:chromeOptions': {
+                args: process.env.HEADLESS === 'false'
+                    ? []
+                    : ['headless=new', 'window-size=1920,1080', 'disable-gpu', 'disable-dev-shm-usage', 'no-sandbox'],
+                // Uncomment and ensure chromeModheader is defined if needed
+                // extensions: [chromeModheader.getEncodedExtension()],
+            },
+        },
+    ],
+    logLevel: 'info',
+    mochaOpts: {
+        ui: 'bdd',
+        timeout: process.env.DEBUG === 'true' ? 7999999 : 2999999,
+        retries: 1,
+    },
+};
 
-exports.config.maxInstances = 1;
-exports.config.capabilities[0].maxInstances = 1;
-//exports.config.capabilities[0]['goog:chromeOptions']["extensions"]= [chromeModheader.getEncodedExtension()];
-exports.config.logLevel = 'info';
-exports.config.mochaOpts = {
-    ui: 'bdd',
-    timeout: process.env.DEBUG === 'true' ? 7999999 : 2999999,
-    retries: 1,
-},
-
-exports.config.capabilities[0]['goog:chromeOptions']["args"] = (process.env.HEADLESS === 'false') ? [] : ['headless=new', 'window-size=1920,1080', 'disable-gpu', 'disable-dev-shm-usage', 'no-sandbox']
-
-exports.config.onComplete = function (exitCode, config, capabilities, results) {
+// onComplete Hook
+exports.config.onComplete = (exitCode, config, capabilities, results) => {
     console.log("***************** INSIDE ONCOMPLETE FUNCTION ***************");
 
     try {
-        // Initialize envProps as an object
-        let envProps = {};
-
-        capabilities.forEach((capability, index) => {
+        const envProps = capabilities.reduce((props, capability, index) => {
             const { browserName, browserVersion } = capability;
 
-            envProps[`BROWSER${index + 1}`] = browserName;
-            envProps[`BROWSER_VERSION${index + 1}`] = browserVersion;
-        });
+            props[`BROWSER${index + 1}`] = browserName;
+            props[`BROWSER_VERSION${index + 1}`] = browserVersion;
 
-        let folderName = './allure-results';
-        let fileName = 'environment.properties';
+            return props;
+        }, {});
+        const folderName = './allure-results';
+        const fileName = 'environment.properties';
 
-        folderName = folderName.replace(/^(\.\.(\/|\\|$))+/, '');
-        fileName = fileName.replace(/^(\.\.(\/|\\|$))+/, '');
-
-        // Check if the folder exists
+        // Safely write environment properties if the folder exists
         if (fs.existsSync(folderName)) {
             const filePath = path.join(folderName, fileName);
-            const properties = Object.entries(envProps)
+            const propertiesContent = Object.entries(envProps)
                 .map(([key, value]) => `${key}=${value}`)
                 .join('\n');
 
-            // Write the properties to the file
-            fs.writeFileSync(filePath, properties);
-
+            fs.writeFileSync(filePath, propertiesContent);
             console.log(`Environment properties file '${fileName}' created successfully.`);
         } else {
-            console.log(`Folder '${folderName}' does not exist.`);
+            console.warn(`Folder '${folderName}' does not exist.`);
         }
 
+        // Generate and open Allure report if not in CI
         if (!process.env.CI) {
-            console.log("Not in CI Environment, Generating Allure report ");
-            var exec = require('child_process').exec;
-            let child = exec('allure generate allure-results --clean && allure open', function (error, stdout, stderr) {
-                console.log('stdout: ' + stdout);
-                console.log('stderr: ' + stderr);
+            console.log("Not in CI Environment, Generating Allure report...");
+            const { exec } = require('child_process');
 
-                if (error !== null) {
-                    console.log('exec error: ' + error);
-                }
+            exec('allure generate allure-results --clean && allure open', (error, stdout, stderr) => {
+                if (stdout) console.log('stdout:', stdout);
+                if (stderr) console.error('stderr:', stderr);
+                if (error) console.error('Error executing Allure command:', error.message);
             });
         }
-    } catch (e) {
-        console.log("**** Error Occurred in OnComplete function ******");
-        console.log(e.message);
+    } catch (error) {
+        console.error("**** Error Occurred in OnComplete function ******");
+        console.error(error.message);
     }
-}
+};

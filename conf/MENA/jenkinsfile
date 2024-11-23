@@ -1,0 +1,89 @@
+pipeline {
+    agent any
+    tools {
+        nodejs 'NodeJS 23'
+    }
+    stages {
+        stage('Clean Workspace') {
+            steps {
+                echo 'Cleaning workspace...'
+                sh 'rm -rf node_modules/ package-lock.json target/allure-results*'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Installing dependencies...'
+                sh 'node --version'
+                sh 'npm install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Starting Test Automation Suites...'
+                sh 'npm run ssu-v3-test'
+            }
+        }
+
+        stage('Generate Test Reports') {
+            steps {
+                script {
+                    def timestamp = new Date().format("yyyyMMddHHmmss")
+                    def reportPath = "target/allure-results-${timestamp}"
+                    echo "Setting Allure results path: ${reportPath}"
+
+                    // Check if allure-results directory exists
+                    if (fileExists('target/allure-results')) {
+                        sh "cp -R target/allure-results ${reportPath}"
+                        allure([
+                            includeProperties: false,
+                            jdk: '',
+                            properties: [],
+                            reportBuildPolicy: 'ALWAYS',
+                            results: [[path: reportPath]]
+                        ])
+                    } else {
+                        echo "Allure results directory not found. Skipping report generation."
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            echo 'The automation finished successfully.'
+        }
+
+        failure {
+            echo 'Something went wrong.'
+        }
+
+        always {
+            echo 'Cleaning up old artifacts...'
+            sh 'rm -f /Users/r.pniower.ext/.jenkins/jobs/SSUTestSuite/builds/*/archive/allure-report.zip || true'
+            
+            echo 'Regenerating reports...'
+            sh 'npm run report:history && npm run report.ci'
+            script {
+                def timestamp = new Date().format("yyyyMMddHHmmss")
+                def reportPath = "target/allure-results-${timestamp}"
+                echo "Setting Allure results path in always block: ${reportPath}"
+
+                // Check if allure-results directory exists
+                if (fileExists('target/allure-results')) {
+                    sh "cp -R target/allure-results ${reportPath}"
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: reportPath]]
+                    ])
+                } else {
+                    echo "Allure results directory not found in always block. Skipping report generation."
+                }
+            }
+        }
+    }
+}

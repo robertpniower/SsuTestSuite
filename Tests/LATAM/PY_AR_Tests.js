@@ -18,7 +18,7 @@ describe("SSU - PedidosYa - AR Tests", function () {
         await baseTest.varifyErrorMessages();
     });
 
-    it('AR - LandingPage Form vslidstion', async function () {
+    it('AR - LandingPage Form validation', async function () {
         let testCaseAttributes = {country: "AR", testCaseName: "AR LandingPage Form validation", language: "es", entity: "PY_AR", region: "LATAM", checkDisplayed: false};
         let baseTest = await new BaseTest(testCaseAttributes);
 

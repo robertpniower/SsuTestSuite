@@ -125,7 +125,7 @@ class CommonSsuValidator {
             await SSUCommonUtils.assertText(answerElement, answer);
 
         }
-    }
+    };
 
     async validateVerticalSegment(language, dropVerticalSegments, verticalValues) {
         allureReporter.addStep("INSIDE Validate Vertical Segment Test");
@@ -144,7 +144,7 @@ class CommonSsuValidator {
 
         return verticalValuesSorted;
 
-    }
+    };
 }
 
 module.exports = CommonSsuValidator;

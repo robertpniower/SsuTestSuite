@@ -9,7 +9,7 @@ class PedidisYaARSSUStrategy extends CommonSsuStrategy {
     constructor(testCaseAttributes){
         super();
         this.testCaseAttributes = testCaseAttributes
-    }
+    };
 
     async validateRestaurantVerticalSegment(language, verticalSegments, businessPageElements) {
         allureReporter.addStep("INSIDE PedidosYa Restaurant Vertical Segment Test");
@@ -29,7 +29,7 @@ class PedidisYaARSSUStrategy extends CommonSsuStrategy {
 
         return categoryTranslated
 
-    }
+    };
 }
 
 module.exports = PedidisYaARSSUStrategy

@@ -9,7 +9,7 @@ class TalabatUAESsuStrategy extends CommonSsuStrategy {
     constructor(testCaseAttributes){
         super();
         this.testCaseAttributes = testCaseAttributes
-    }
+    };
 
     async validateRestaurantVerticalSegment(language, verticalSegments, businessPageElements) {
         allureReporter.addStep("INSIDE Talabat Restaurant Vertical Segment Test");

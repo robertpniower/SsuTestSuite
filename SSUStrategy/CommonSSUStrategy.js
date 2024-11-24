@@ -76,47 +76,6 @@ class CommonSsuValidator {
         }
     }
 
-    async verifyFooterLinks(testCaseAttributes, elements, links) {
-        allureReporter.addStep("INSIDE Verify Footer Links");
-
-        if (testCaseAttributes.region === "LATAM") {
-            links[testCaseAttributes.country + "_link"] = "#"
-        }
-
-        await Operations.waitForPageLoad();
-
-        let linkSection = elements['link_section'];
-        let footerElement = await browser.$(linkSection.locator);
-
-        await footerElement.scrollIntoView({ block: 'center', inline: 'center' });
-
-        for (let fieldName in elements) {
-
-            if (fieldName.toLowerCase() === 'link_section') {
-                continue;
-            }
-
-            let elementInfo = elements[fieldName];
-            let linkElement = links[fieldName];
-
-            if (linkElement) {
-                allureReporter.addStep(`Testing link: ${linkElement}`)
-
-                let element = await browser.$(elementInfo.locator)
-
-                if (element) {
-                    await Operations.assertHrefValue(element, linkElement);
-
-                } else {
-
-                    assert.fail(`Element not found for locator: ${elementInfo.locator}`);
-                }
-            } else {
-                assert.fail(`Link not found for field: ${fieldName}`);
-            }
-        }
-    }
-
     async verifyFaqSectionText(elements, faqData, country) {
         allureReporter.addStep("INSIDE Verify FAQ Section");
 

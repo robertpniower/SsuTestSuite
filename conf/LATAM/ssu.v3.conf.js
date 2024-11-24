@@ -6,7 +6,7 @@ const CWD = process.env.CI ? process.env.WORKSPACE : process.env.PWD;
 // Initialize exports.config with baseConf
 exports.config = {
     ...baseConf.config,
-    specs: [`${CWD}/Tests/LATAM/**/*.js`],
+    specs: [`${CWD}/Tests/**/**/*.js`],
     maxInstances: 1,
     capabilities: [
         {

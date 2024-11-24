@@ -214,6 +214,39 @@ class Utility {
         return shuffled.slice(0, numValues);
     }
 
+    async retry(callback, errorMessage = "", maxRetryCount = 1) {
+        let numberOfTries = 0;
+        let returnValue;
+
+        do {
+            try {
+                returnValue = await callback();
+                break;
+            }
+            catch (error) {
+                console.log("INSIDE CATCH BLOCK ERROR: " + error);
+
+                if (numberOfTries !== maxRetryCount) { await browser.refresh() }
+
+                ;
+                numberOfTries++;
+
+                if (numberOfTries > maxRetryCount) {
+                    allureReporter.addStep(`${errorMessage} 
+                Failed with error: ${error} after ${numberOfTries} attempts`);
+
+                    assert.isTrue(false, ` ${errorMessage} 
+                Failed with error: ${error} after ${numberOfTries} attempts`);
+                }
+
+                allureReporter.addStep(`${callback.name} function thrown error: ${error}, Retrying again...
+             retryCount: ${numberOfTries}`)
+            }
+        } while (numberOfTries <= maxRetryCount)
+
+        return returnValue;
+    }
+
 }
 
 module.exports = new Utility();

@@ -34,33 +34,36 @@ class CommonSsuValidator {
         const displayedErrorMessages = [];
 
         try {
-            const errorFields = await SSUCommonUtils.getErrorFields(elements, country);
-            let errorMessagesFound = false;
+            const errorFields = await this.getErrorFields(elements, country);
 
-            for (const fieldName of errorFields) {
-                const element = elements[fieldName];
-                const errorMessage = $(`${element.locator}`);
+            await browser.waitUntil(async () => {
+                let errorMessagesFound = false;
 
-                if (await errorMessage.isDisplayed()) {
-                    const actualErrorMessage = (await errorMessage.getText()).trim();
+                for (const fieldName of errorFields) {
+                    const element = elements[fieldName];
+                    const errorMessage = $(`${element.locator}`);
 
-                    if (actualErrorMessage !== '') {
-                        displayedErrorMessages.push(actualErrorMessage);
-                        errorMessagesFound = true;
+                    if (await errorMessage.isDisplayed()) {
+                        const actualErrorMessage = (await errorMessage.getText()).trim();
 
-                        if (checkDisplayed) {
-                            console.log(`Displayed error message: ${actualErrorMessage} in Field: ${fieldName}`);
-                            allureReporter.addStep(`Displayed error message: ${actualErrorMessage} in Field: ${fieldName}`);
+                        if (actualErrorMessage !== '') {
+                            displayedErrorMessages.push(actualErrorMessage);
+                            errorMessagesFound = true;
 
-                            if (expectedErrorMessages[fieldName]) {
-                                expect(actualErrorMessage).to.equal(expectedErrorMessages[fieldName]);
+                            if (checkDisplayed) {
+                                console.log(`Displayed error message: ${actualErrorMessage} in Field: ${fieldName}`);
+                                allureReporter.addStep(`Displayed error message: ${actualErrorMessage} in Field: ${fieldName}`);
+
+                                if (expectedErrorMessages[fieldName]) {
+                                    expect(actualErrorMessage).to.equal(expectedErrorMessages[fieldName]);
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            return (errorMessagesFound && checkDisplayed) || (!errorMessagesFound && !checkDisplayed);
+                return (errorMessagesFound && checkDisplayed) || (!errorMessagesFound && !checkDisplayed);
+            }, { timeout: 5000, timeoutMsg: `Error message is ${checkDisplayed ? '' : 'not '}displayed` });
 
             if (checkDisplayed && displayedErrorMessages.length > 0) {
                 console.log('Error messages are displayed.');
@@ -74,7 +77,7 @@ class CommonSsuValidator {
             allureReporter.addStep('Error occurred during error message verification:', error)
             throw error;
         }
-    }
+    };
 
     async verifyFaqSectionText(elements, faqData, country) {
         allureReporter.addStep("INSIDE Verify FAQ Section");

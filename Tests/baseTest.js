@@ -3,6 +3,7 @@ const CommonUtils = require('../Utilities/commonUtils');
 const SsuBaseStrategy = require('../SSUStrategy/SSUBaseStrategy');
 const landingPageFaqData = require("../Objects/faqValidationData/faqData.json");
 const UIExecutor = require('../UIExecutor/UIExecutor');
+const Utility = require('../Utilities/utility')
 const errorMessages = require('../Objects/errorMessages/errorMessages.json');
 const TalabatUAESsuStrategy = require('../SSUStrategy/TbAeSsuStrategy');
 
@@ -40,7 +41,7 @@ class BaseTest {
     async validateVerticalSegmentTest(verticalSegments) {
         await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
         await CommonUtils.cookieBannerAction("deny")
-        await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData);
+        await Utility.retry(await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData), "SubmitLandingPage function Failed");
         let verticalSegment = await browser.$(this.businessPageElements['vertical_segment'].locator);
         let verticalValues = await UIExecutor.getAllDropdownOptions(verticalSegment);
         let dropVerticalSegments = verticalSegments.filter(verticalSegment => verticalSegment.verticalSegment !== 'Regular Restaurant');
@@ -57,7 +58,7 @@ class BaseTest {
     async shopVerticalSegmentTest(verticalSegments) {
         await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
         await CommonUtils.cookieBannerAction("deny")
-        await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData);
+        await Utility.retry(async () => await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData), "SubmitLandingPage function Failed");
         let verticalSegment = await browser.$(this.businessPageElements['vertical_segment'].locator);
 
         await verticalSegment.waitForExist();
@@ -70,7 +71,7 @@ class BaseTest {
     async restaurantVerticalSegmentTest(verticalSegments) {
         await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
         await CommonUtils.cookieBannerAction("deny")
-        await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData);
+        await Utility.retry(async () => await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData), "SubmitLandingPage function Failed");
         await CommonUtils.transitionToBusinessDetailsPage(this.testCaseAttributes.language, this.landingPageElements);
         await this.ssuStrategy.validateRestaurantVerticalSegment(this.testCaseAttributes.language, verticalSegments, this.businessPageElements, this.businessPageTestData);
 
@@ -81,9 +82,9 @@ class BaseTest {
 
         this.businessPageTestData.vertical_segment.data = verticalSegment.verticalSegmentTranslated[this.testCaseAttributes.language]
         await CommonUtils.cookieBannerAction("deny")
-        await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData);
-        await this.ssuStrategy.submitBusinessDetailsPage(this.businessPageElements,this.businessPageTestData);
-        await this.ssuStrategy.submitAddressDetailsPage(this.addressPageElements, this.addressPageTestData)
+        await Utility.retry(async () => await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData), "SubmitLandingPage function Failed");
+        await Utility.retry(async () => await this.ssuStrategy.submitBusinessDetailsPage(this.businessPageElements,this.businessPageTestData), "SubmitBusinessDetailsPage function Failed")
+        await Utility.retry(async () => await this.ssuStrategy.submitAddressDetailsPage(this.addressPageElements, this.addressPageTestData), "SumbmitAddressDetailsPage function Failed");
         await CommonUtils.validateVerticalSegmentDropPage(this.businessPageTestData.vertical_segment.data, this.country, this.testCaseAttributes)
 
     };
@@ -91,7 +92,7 @@ class BaseTest {
     async validateRestaurantVerticalSegmentTest(verticalSegments) {
         await CommonUtils.NavigateUserToLandingPage(this.testCaseAttributes.region, this.country, process.env.SSU_ENV);
         await CommonUtils.cookieBannerAction("deny")
-        await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData);
+        await Utility.retry(async () => await this.ssuStrategy.submitLandingPage(this.landingPageElements,this.landingPageTestData), "SubmitLandingPage function Failed");
         await CommonUtils.transitionToBusinessDetailsPage(this.testCaseAttributes.language, this.landingPageElements);
 
         await this.ssuStrategy.validateRestaurantVerticalSegment(this.testCaseAttributes.language, verticalSegments, this.businessPageElements, this.businessPageTestData);

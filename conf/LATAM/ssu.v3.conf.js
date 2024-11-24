@@ -3,10 +3,9 @@ const path = require('path');
 const baseConf = require('../../wdio.base.conf');
 const CWD = process.env.CI ? process.env.WORKSPACE : process.env.PWD;
 
-// Initialize exports.config with baseConf
 exports.config = {
     ...baseConf.config,
-    specs: [`${CWD}/Tests/**/**/*.js`],
+    specs: [`${CWD}/Tests/LATAM/**/*.js`],
     maxInstances: 1,
     capabilities: [
         {
@@ -17,8 +16,6 @@ exports.config = {
                 args: process.env.HEADLESS === 'false'
                     ? []
                     : ['headless=new', 'window-size=1920,1080', 'disable-gpu', 'disable-dev-shm-usage', 'no-sandbox'],
-                // Uncomment and ensure chromeModheader is defined if needed
-                // extensions: [chromeModheader.getEncodedExtension()],
             },
         },
     ],

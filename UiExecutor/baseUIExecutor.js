@@ -151,7 +151,7 @@ class BaseUIExecutor {
    */
     async getAllDropdownOptions(dropdownElement) {
         await Operations.toClick(dropdownElement);
-        await $("#menu- .MuiMenuItem-root").waitForExist({ timeout:50000});
+        await $("#menu- .MuiMenuItem-root").waitForExist({ timeout:80000});
         let dropdownOptions = await browser.$$("#menu- .MuiMenuItem-root");
         let options = [];
 

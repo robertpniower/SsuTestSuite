@@ -54,6 +54,6 @@ describe("SSU - PedidosYa - AR Tests", function () {
         let verticalSegments = require('../../Objects/categories/LATAM/PY_AR.json');
         let baseTest = await new BaseTest(testCaseAttributes);
 
-        await baseTest.restaurantVerticalSegmentTest(verticalSegments)
+        await baseTest.restaurantVerticalSegmentTest(verticalSegments);
     });
 })

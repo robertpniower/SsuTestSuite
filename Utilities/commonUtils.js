@@ -9,12 +9,6 @@ const UiExecutor = require("../UIExecutor/UIExecutor")
 
 class CommonUtils {
 
-    /**
- * To navigate to SSU landing page of given entity, country and environment
- * @param {*} entity - Entity name
- * @param {*} countryCode - Country Code
- * @param {*} environment - Environment
- */
     async NavigateUserToLandingPage(region, countryCode, environment, language = 'en') {
         let url = countryConfig[region][countryCode]["landingPage"][environment.toLowerCase()]
         let newUrl = (region != "LATAM") ? `${url}/${language}` : url;
@@ -31,11 +25,6 @@ class CommonUtils {
         return url.toLowerCase();
     }
 
-    /**
-  * To filter Elements applicable for a given countryCode
-  * @param {*} elements - Elements Object of a page
-  * @param {*} countryCode - country code for which the elements has to be filtered
-  */
     async filterElementsByCountryCode(elements, countryCode) {
         let applicableElements = {}
 
@@ -48,11 +37,6 @@ class CommonUtils {
         return applicableElements
     }
 
-    /**
-   * @description - Method to generate locator string based on the provided locator type
-   * @param {*} locator - locator value
-   * @param {*} locatorType - type of the locator
-   */
     async getLocatorString(locator, locatorType) {
 
         let locatorString = "";
@@ -83,12 +67,6 @@ class CommonUtils {
         return locatorString;
     }
 
-    /**
-* @description - Function to read web elements CSV and return it as a JSON object
-* @param {*} filePath - Absolute Path to the elements File
-* @param {*} country - Country Name
-* @param {*} filterByCountry - Defaults to True - Filter Elements by Country Name and returns the filtered list
-*/
     async getElementsFromCSV(filePath, country, filterByCountry = true) {
         if (!fs.existsSync(filePath)) {
             return {};
@@ -111,12 +89,6 @@ class CommonUtils {
         return elementsObject;
     }
 
-    /**
- * @description - Function to read test data CSV and return it as a JSON object
- * @param {*} filePath - Absolute Path to the test data File
- * @param {*} testScriptName - Name of the test script
- * @param {*} index - Defaults to Zero - value will taken when two sets of test data is present for the same TC
- */
     async loadTestDataFromCSV(filePath, testScriptName, index = 0) {
         if (!fs.existsSync(filePath)) {
             return {};
@@ -146,11 +118,6 @@ class CommonUtils {
         return formattedTestData;
     }
 
-    /**
- * @dineshwarandh
- * @description - Function to generate random data for the given dataformat and length
- * @param {*} dataFormat - data format provided by the user in CSV containing dataType, min length and max length
- */
     async generateRandomTestData(dataFormat) {
         const dataType = dataFormat.toLowerCase().split('(')[0];
         const minLength = dataFormat.includes(',') ? dataFormat.split("(")[1].split(",")[0] : dataFormat.split("(")[1].slice(0, -1);
@@ -180,11 +147,6 @@ class CommonUtils {
         return String(data);
     }
 
-    /**
-   * @description - iterate all the objects and filter only testdata and remove other fields
-   * @param {testData} - an object containing multiple testdata object
-   * @returns {object} returns only test data as object of objects
-   */
     async cookieBannerAction(action) {
         let isCookieBannerDisplayed = false;
 

@@ -5,7 +5,7 @@ const utility = require('../Utilities/utility.js');
 const Operations = require("../Operations/Operations.js");
 let allureReporter = require("@wdio/allure-reporter").default;
 
-class PedidisYaARSSUStrategy extends CommonSsuStrategy {
+class PedidosYaARSSUStrategy extends CommonSsuStrategy {
     constructor(testCaseAttributes){
         super();
         this.testCaseAttributes = testCaseAttributes
@@ -32,4 +32,4 @@ class PedidisYaARSSUStrategy extends CommonSsuStrategy {
     };
 }
 
-module.exports = PedidisYaARSSUStrategy
+module.exports = PedidosYaARSSUStrategy

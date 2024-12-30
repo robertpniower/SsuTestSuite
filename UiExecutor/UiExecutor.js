@@ -6,11 +6,6 @@ const BaseUIExecutor = require("./baseUIExecutor.js");
 
 class UIExecutor extends BaseUIExecutor {
 
-    /**
-     * To perform UI Interaction on elements for given testData and action
-     * @param {*} elements - Locator Object
-     * @param {*} testData - testdata which are passed to the elements
-    */
     async performUIInteractions(elements, testData) {
         const keys = Object.keys(testData);
 
@@ -53,11 +48,6 @@ class UIExecutor extends BaseUIExecutor {
                         case "selectlidropdownbytext":
                             await this.selectListElementDropdownValue(element, data, "visibleText");
                             allureReporter.addStep(`Selected ${data}  in ${keys[i]} dropdown element`);
-                            break;
-
-                        case "multiselectdropdownbytext":
-                            await this.mutliSelectDropdownValue(element, data, "visibleText");
-                            allureReporter.addStep(`Selected ${data} in ${keys[i]} multi select dropdown element`);
                             break;
 
                         case "selectradiobutton":

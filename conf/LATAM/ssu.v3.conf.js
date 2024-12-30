@@ -27,7 +27,6 @@ exports.config = {
     },
 };
 
-// onComplete Hook
 exports.config.onComplete = (exitCode, config, capabilities, results) => {
     console.log("***************** INSIDE ONCOMPLETE FUNCTION ***************");
 
@@ -43,7 +42,6 @@ exports.config.onComplete = (exitCode, config, capabilities, results) => {
         const folderName = './allure-results';
         const fileName = 'environment.properties';
 
-        // Safely write environment properties if the folder exists
         if (fs.existsSync(folderName)) {
             const filePath = path.join(folderName, fileName);
             const propertiesContent = Object.entries(envProps)
@@ -56,7 +54,6 @@ exports.config.onComplete = (exitCode, config, capabilities, results) => {
             console.warn(`Folder '${folderName}' does not exist.`);
         }
 
-        // Generate and open Allure report if not in CI
         if (!process.env.CI) {
             console.log("Not in CI Environment, Generating Allure report...");
             const { exec } = require('child_process');

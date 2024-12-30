@@ -17,7 +17,7 @@ describe("SSU - Talabat - AE Tests", function () {
         let testCaseAttributes = {country: "AE", testCaseName: "AE Shop Validate VerticalSegment Test", language: "en", entity: "TB_AE", region: "MENA"};
         let baseTest = await new BaseTest(testCaseAttributes);
 
-        await baseTest.shopVerticalSegmentTest(dropVerticalSegments)
+        await baseTest.shopVerticalSegmentTest(dropVerticalSegments);
     });
 
     it('AE Restaurant Validate VerticalSegment Test', async function () {
@@ -25,7 +25,7 @@ describe("SSU - Talabat - AE Tests", function () {
         let testCaseAttributes = {country: "AE", testCaseName: "AE Restaurant Validate VerticalSegment Test", language: "en", entity: "TB_AE", region: "MENA"};
         let baseTest = await new BaseTest(testCaseAttributes);
 
-        await baseTest.validateRestaurantVerticalSegmentTest(verticalSegments)
+        await baseTest.validateRestaurantVerticalSegmentTest(verticalSegments);
     });
 
     context('AE Shop Drop Test', async function () {

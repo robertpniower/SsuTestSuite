@@ -3,7 +3,6 @@ const path = require('path');
 const baseConf = require('../../wdio.base.conf');
 const CWD = process.env.CI ? process.env.WORKSPACE : process.env.PWD;
 
-// Initialize exports.config with baseConf
 exports.config = {
     ...baseConf.config,
     specs: [`${CWD}/Tests/MENA/**/*.js`],
@@ -17,8 +16,6 @@ exports.config = {
                 args: process.env.HEADLESS === 'false'
                     ? []
                     : ['headless=new', 'window-size=1920,1080', 'disable-gpu', 'disable-dev-shm-usage', 'no-sandbox'],
-                // Uncomment and ensure chromeModheader is defined if needed
-                // extensions: [chromeModheader.getEncodedExtension()],
             },
         },
     ],
@@ -30,7 +27,6 @@ exports.config = {
     },
 };
 
-// onComplete Hook
 exports.config.onComplete = (exitCode, config, capabilities, results) => {
     console.log("***************** INSIDE ONCOMPLETE FUNCTION ***************");
 
@@ -46,7 +42,6 @@ exports.config.onComplete = (exitCode, config, capabilities, results) => {
         const folderName = './allure-results';
         const fileName = 'environment.properties';
 
-        // Safely write environment properties if the folder exists
         if (fs.existsSync(folderName)) {
             const filePath = path.join(folderName, fileName);
             const propertiesContent = Object.entries(envProps)
@@ -59,7 +54,6 @@ exports.config.onComplete = (exitCode, config, capabilities, results) => {
             console.warn(`Folder '${folderName}' does not exist.`);
         }
 
-        // Generate and open Allure report if not in CI
         if (!process.env.CI) {
             console.log("Not in CI Environment, Generating Allure report...");
             const { exec } = require('child_process');

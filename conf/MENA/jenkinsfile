@@ -26,20 +26,20 @@ pipeline {
             }
         }
 
-        // stage('Generating Test Reports...') {
-        //     steps {
-        //     sh 'npm run report:history && npm run report.ci'
-        //     script {
-        //             allure([
-        //                     includeProperties: false,
-        //                     jdk: '',
-        //                     properties: [],
-        //                     reportBuildPolicy: 'ALWAYS',
-        //                     results: [[path: 'target/allure-results']]
-        //             ])
-        //     }   
-        //     }
-        // }
+        stage('Generating Test Reports...') {
+        steps {
+         sh 'npm run report:history && npm run report.ci'
+          script {
+                   allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: 'target/allure-results']]
+                    ])
+                }   
+             }
+         }
     }
     post {
         success {

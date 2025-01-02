@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        nodejs 'NodeJS 23'
+        nodejs 'nodejs235'
     }
     stages {
         stage('Clean Workspace') {

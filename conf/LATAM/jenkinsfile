@@ -25,26 +25,27 @@ pipeline {
                 sh 'npm run ssu-v3-test'
             }
         }
-    post {
-        success {
-            echo 'The automation finished successfully.'
-        }
+        post {
+            success {
+                echo 'The automation finished successfully.'
+            }
 
-        failure {
-            echo 'Something went wrong.'
-        }
+            failure {
+                echo 'Something went wrong.'
+            }
 
-            always{
-                sh 'npm run report:history && npm run report.ci'
-            script {
-                        allure([
-                                includeProperties: false,
-                                jdk: '',
-                                properties: [],
-                                reportBuildPolicy: 'ALWAYS',
-                                results: [[path: 'target/allure-results']]
-                        ])
-                }
+                always{
+                    sh 'npm run report:history && npm run report.ci'
+                script {
+                            allure([
+                                    includeProperties: false,
+                                    jdk: '',
+                                    properties: [],
+                                    reportBuildPolicy: 'ALWAYS',
+                                    results: [[path: 'target/allure-results']]
+                            ])
+                    }
+            }
         }
     }
 }
